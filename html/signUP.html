@@ -8,39 +8,76 @@
 </head>
 <body>
 
-    <h2>Signup</h2>
+    <ul style="display: inline; margin: 0%; padding: 0%; overflow: hidden; ">
+        <li style="display: block; padding: 8px; float: left;"><a  href="index.html">Home</a></li>
+        <li style="display: block; padding: 8px; float: left;"><a  href="news.html">News</a></li>
+        <li style="display: block; padding: 8px; float: left;"><a  href="contact.html">Contact</a></li>
+        <li style="display: block; padding: 8px; float: left;"><a  href="about.html">About</a></li>
+        <li style="display: block; padding: 8px; float: left;"><a  href="logIN.html">Login</a></li>
+    </ul>
+    <h6> ali</h6>
+    <hr>
+    <br><br>
 
+    <h2>Signup</h2>
+    
     <div>
 
         <div>
-            <label>Name</label>
-            <input type="text">
+            <label id="name">Name</label>
+            <input type="text" for="name" required placeholder="ahmed ali">
 
         </div>
 
+        <br>
+
         <div>
-            <label>Username</label>
-            <input type="text">
+            <label id="username">Username</label>
+            <input type="text" for="username" required placeholder="011ahmed">
             
         </div>
 
+        <br>
+
         <div>
-            <label>Email</label>
-            <input type="email" >
+            <label id="email">Email</label>
+            <input type="email" for="email" required placeholder="ahmed@gmail.com" >
             
         </div>
+
+        <br>
 
         <div>
             <label id="pass">Password</label>
-            <input type="password" for="pass" required>
+            <input type="password" for="pass" required placeholder="pass1234">
             
         </div>
 
+        <br>
+
         <div>
             <label id="repass">Re Password</label>
-            <input type="password" for="repass" required>
+            <input type="password" for="repass" required >
             
         </div>
+
+        <br>
+
+        <div>
+
+            <label for="title">admin or user ?</label>
+            <br>
+
+            <label  for="admin">admin</label>
+            <input type="radio" id="admin" name="title"value="admin">
+
+            <label  for="user">User</label>
+            <input type="radio" id="user" name="title"value="user">
+
+           
+        </div>
+
+        <br>
 
         <button for="password" for="username">
             Signup
