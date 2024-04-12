@@ -4,52 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="/images/" itemprop="image">
-    <title>log in</title>
-    
-
+    <title>Login</title>
 </head>
 <body>
 
-    <ul style="display: inline; margin: 0%; padding: 0%; overflow: hidden; ">
-        <li style="display: block; padding: 8px; float: left;"><a  href="index.html">Home</a></li>
-        <li style="display: block; padding: 8px; float: left;"><a  href="news.html">News</a></li>
-        <li style="display: block; padding: 8px; float: left;"><a  href="contact.html">Contact</a></li>
-        <li style="display: block; padding: 8px; float: left;"><a  href="about.html">About</a></li>
-        <li style="display: block; padding: 8px; float: left;"><a  href="logIN.html">Login</a></li>
+    <ul style="display: inline; margin: 0%; padding: 0%; overflow: hidden;">
+        <li style="display: block; padding: 8px; float: left;"><a href="index.html">Home</a></li>
+        <li style="display: block; padding: 8px; float: left;"><a href="news.html">News</a></li>
+        <li style="display: block; padding: 8px; float: left;"><a href="contact.html">Contact</a></li>
+        <li style="display: block; padding: 8px; float: left;"><a href="about.html">About</a></li>
+        <li style="display: block; padding: 8px; float: left;"><a href="logIN.html">Login</a></li>
         <input type="text" placeholder="Search.." name="search">
         <button type="submit"><i class="fa fa-search">search</i></button>
     </ul>
-    <h6> ali</h6>
+    <h6>ali</h6>
     <hr>
     <br><br>
 
-    <header>log in</header>
+    <header>Login</header>
 
     <div style="place-items: center;">
 
         <div>
-            <label for="username" >user name</label>
-            <input type="text" id="username" for="username required placeholder="ahmed-10" >
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required placeholder="ahmed-10">
         </div>
 
         <br>
 
         <div>
-            <label for="password" >password</label>
-            <input type="password" id="password" for="password" required>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
         </div>
 
         <br>
-
-        <button for="password" for="username">
-           Login
-        </button>
-
-        <p>If you don't have an account?<a href="signUP.html">Register</a>.</p>
+    <script src="/JavaScript/logIN.js"> login();</script>
 
 
+        <button type="submit" onclick="login();">Login</button>
 
+        <p>If you don't have an account? <a href="signUP.html">Register</a>.</p>
     </div>
+
     
 </body>
 </html>

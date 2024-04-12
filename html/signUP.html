@@ -4,90 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="/images/" itemprop="image">
-    <title>SignUP</title>
+    <title>Sign Up</title>
 </head>
 <body>
 
-    <ul style="display: inline; margin: 0%; padding: 0%; overflow: hidden; ">
-        <li style="display: block; padding: 8px; float: left;"><a  href="index.html">Home</a></li>
-        <li style="display: block; padding: 8px; float: left;"><a  href="news.html">News</a></li>
-        <li style="display: block; padding: 8px; float: left;"><a  href="contact.html">Contact</a></li>
-        <li style="display: block; padding: 8px; float: left;"><a  href="about.html">About</a></li>
-        <li style="display: block; padding: 8px; float: left;"><a  href="logIN.html">Login</a></li>
+    <ul style="display: inline; margin: 0%; padding: 0%; overflow: hidden;">
+        <li style="display: block; padding: 8px; float: left;"><a href="index.html">Home</a></li>
+        <li style="display: block; padding: 8px; float: left;"><a href="news.html">News</a></li>
+        <li style="display: block; padding: 8px; float: left;"><a href="contact.html">Contact</a></li>
+        <li style="display: block; padding: 8px; float: left;"><a href="about.html">About</a></li>
+        <li style="display: block; padding: 8px; float: left;"><a href="logIN.html">Login</a></li>
         <input type="text" placeholder="Search.." name="search">
         <button type="submit"><i class="fa fa-search">search</i></button>
     </ul>
-    <h6> ali</h6>
+    <h6>ali</h6>
     <hr>
     <br><br>
 
-    <h2>Signup</h2>
-    
-    <div>
+    <header>Sign Up</header>
+
+    <div style="place-items: center;">
 
         <div>
-            <label id="name">Name</label>
-            <input type="text" for="name" required placeholder="ahmed ali">
-
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required placeholder="ahmed ali">
         </div>
 
         <br>
 
         <div>
-            <label id="username">Username</label>
-            <input type="text" for="username" required placeholder="011ahmed">
-            
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required placeholder="011ahmed">
         </div>
 
         <br>
 
         <div>
-            <label id="email">Email</label>
-            <input type="email" for="email" required placeholder="ahmed@gmail.com" >
-            
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="ahmed@gmail.com">
         </div>
 
         <br>
 
         <div>
-            <label id="pass">Password</label>
-            <input type="password" for="pass" required placeholder="pass1234">
-            
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required placeholder="pass1234">
         </div>
 
         <br>
 
         <div>
-            <label id="repass">Re Password</label>
-            <input type="password" for="repass" required >
-            
+            <label for="repassword">Re-enter Password</label>
+            <input type="password" id="repassword" name="repassword" required>
         </div>
 
         <br>
 
         <div>
-
-            <label for="title">admin or user ?</label>
+            <label>User Type</label>
             <br>
-
-            <label  for="admin">admin</label>
-            <input type="radio" id="admin" name="title"value="admin">
-
-            <label  for="user">User</label>
-            <input type="radio" id="user" name="title"value="user">
-
-           
+            <input type="radio" id="admin" name="usertype" value="admin">
+            <label for="admin">Admin</label>
+            <input type="radio" id="user" name="usertype" value="user">
+            <label for="user">User</label>
         </div>
 
         <br>
 
-        <button for="password" for="username">
-            Signup
-        </button>
+        <button type="submit" onclick="signUp();" >Sign Up</button>
 
-        <p>Do you have an account?<a href="logIN.html">login</a>.</p>
-
+        <p>Already have an account? <a href="logIN.html">Login</a>.</p>
     </div>
     
+    <script src="/JavaScript/signUp.js">
+       
+        // Define the login function
+        signUp();
+    </script>
 </body>
 </html>
