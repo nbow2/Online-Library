@@ -3,9 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script src="../JS/BookTime.js"></script>
+    <title>Booking List</title>
 </head>
 <body>
+    <form  method="post" class="BookedList" >
+        <label for="BookName">Book name</label>
+        <input type="text" name="BookName" id="BookName"><br>
+        
+        <label for="Author">Author</label>
+        <input type="text" name="Author" id="Author"><br>
+
+        <label for="ISBN">ISBN</label>
+        <input type="text" name="ISBN" id="ISBN"><br>
+        <label for="Genre">Genre</label>
+        <input type="text" name="Genre" id="Genre" ><br>
+
+        <label for="startDate">Start Day</label>
+        <input type="date" name="startDate" id="startDate"><br>
+        <label for="endDate">End Day</label>
+        <input type="date" name="endDate" id="endDate"><br>
+
+        <input  type="submit" name="Submit" class="submit" onclick="calculateBookedDays()">
+        <p id="result" ></p>
     
+    </form>
+    
+
+        
+    </form>
 </body>
 </html>
