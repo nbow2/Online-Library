@@ -1,48 +1,127 @@
-
 body {
-    font-family: Arial, sans-serif;
+    background-color: #fafafa;
     margin: 0;
     padding: 0;
-    background-color: #f2f2f2;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    color: black;
+    background: linear-gradient(120deg, black , white);
 }
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-}
+
 .container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: #c1c1c1 ;
+    border-radius: 30px;
 }
-.book-details {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+.container h1 {
+    text-align: center;
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid silver;
 }
-.book-details h2 {
-    margin-top: 0;
+
+.container form {
+    padding: 0 30px ;
+    box-sizing: border-box;
 }
-.book-details p {
-    margin-top: 5px;
+
+.form .text_field {
+    position: relative;
+    border-bottom: 2px solid black;
+    margin: 30px 0;
 }
-.book-details img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
-    margin-bottom: 10px;
+
+.text_field input {
+    width: 100%;
+    padding: 0 5px;
+    height: 30px;
+    font-size: 16px;
+    border: none;
+    background:none ;
+    outline: none;
 }
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #333;
-    color: #fff;
+
+.text_field label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: black;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.text_field span::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #2691d2;
+}
+
+.text_field input:focus ~ label,
+.text_field input:valid ~ label {
+    top: -5px;
+    color: #2691d2;
+}
+
+.text_field input:focus ~ span,
+.text_field input:valid ~ span {
+    width: 100%;
+}
+
+input[type="submit"] {
+    width: 100%;
+    height: 40px;
+    border: 1px solid;
+    border-radius: 25px;
+    background: #021024;
+    font-size: 18px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.signup_link {
+    margin: 30px 0;
+    text-align: center;
+    font-size: 16px;
+    color: #666666;
+}
+
+.signup_link a {
     text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    color: blue;
 }
-.btn:hover {
-    background-color: #555;
+
+.user_type {
+    margin-bottom: 20px;
+}
+
+.user_type label {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.user_type input[type="radio"] {
+    margin-right: 10px;
+}
+
+.user_type input[type="radio"] + label {
+    font-size: 14px;
+    margin-right: 16px;
 }
