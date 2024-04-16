@@ -4,31 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="/images/" itemprop="image">
+    <link rel="stylesheet" href="/Css/sign.css">
+
     <title>Sign Up</title>
 </head>
 <body>
 
-    <ul style="display: inline; margin: 0%; padding: 0%; overflow: hidden;">
-        <li style="display: block; padding: 8px; float: left;"><a href="index.html">Home</a></li>
-        <li style="display: block; padding: 8px; float: left;"><a href="news.html">News</a></li>
-        <li style="display: block; padding: 8px; float: left;"><a href="contact.html">Contact</a></li>
-        <li style="display: block; padding: 8px; float: left;"><a href="about.html">About</a></li>
-        <li style="display: block; padding: 8px; float: left;"><a href="logIN.html">Login</a></li>
-        <input type="text" placeholder="Search.." name="search">
-        <button type="submit"><i class="fa fa-search">search</i></button>
-    </ul>
-    <h6>ali</h6>
-    <hr>
+ 
+
     <br><br>
 
-    <header>Sign Up</header>
-<form>
-    <div style="place-items: center;">
+    
+    <div class="center">
 
-        <div>
+        <h1>Sign Up</h1>
+
+<form method="post">
+    <div class="text_filed">
+
+        
+            <input type="text" id="name" name="name" required>
             <label for="name">Name</label>
-            <input type="text" id="name" name="name" required placeholder="ahmed ali">
-        </div>
+            
+        
 
         <br>
 
@@ -76,6 +74,12 @@
         <p>Already have an account? <a href="logIN.html">Login</a>.</p>
     </div>
 </form>
+
+</div>
+
+
+
+
     <script src="/JavaScript/signUp.js">
        
         // Define the login function

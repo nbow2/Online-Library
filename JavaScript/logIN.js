@@ -18,18 +18,11 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("Username:", username);
         console.log("Password:", password);
 
-        // Here you can make an AJAX request to send the login credentials to the server
-        // Example:
-        // var formData = { username: username, password: password };
-        // var jsonFormData = JSON.stringify(formData);
-        // var xhr = new XMLHttpRequest();
-        // xhr.open("POST", "your-server-endpoint", true);
-        // xhr.setRequestHeader("Content-Type", "application/json");
-        // xhr.send(jsonFormData);
+      
     }
 
     // Attach login function to the form submit button click event
-    document.querySelector("button").addEventListener("click", function(event) {
+    document.querySelector(SubmitEvent).addEventListener("click", function(event) {
         event.preventDefault(); // Prevent the default form submission behavior
         login(); // Call the login function
     });

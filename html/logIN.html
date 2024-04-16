@@ -4,48 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="/images/" itemprop="image">
+    <link rel="stylesheet" href="/Css/log.css">
+    <link rel="stylesheet" href="/Css/navBar.css">
+    <script defer src="/JavaScript/logIN.js"></script>
+    <script ></script>
     <title>Login</title>
 </head>
 <body>
 
-    <ul style="display: inline; margin: 0%; padding: 0%; overflow: hidden;">
-        <li style="display: block; padding: 8px; float: left;"><a href="index.html">Home</a></li>
-        <li style="display: block; padding: 8px; float: left;"><a href="news.html">News</a></li>
-        <li style="display: block; padding: 8px; float: left;"><a href="contact.html">Contact</a></li>
-        <li style="display: block; padding: 8px; float: left;"><a href="about.html">About</a></li>
-        <li style="display: block; padding: 8px; float: left;"><a href="logIN.html">Login</a></li>
-        <input type="text" placeholder="Search.." name="search">
-        <button type="submit"><i class="fa fa-search">search</i></button>
-    </ul>
-    <h6>ali</h6>
-    <hr>
+    <nav class="navbar">
+      <div class="navdiv">
+        <div class="logo"><a  >Library of Egypt </div>
+      <ul>
+        <li ><a href="index.html">Home</a></li>
+        <li ><a href="#">page0</a></li>
+        <li ><a href="#">page1</a></li>
+        <li ><a href="#">page2</a></li>
+        <li ><a href="#">page3</a></li>
+      </ul>
+        <button><a href="logIN.html">login</a></button>
+        
+      </div>
+    </nav>
+   
+
+
+   
     <br><br>
 
-    <header>Login</header>
+    
 
-    <div style="place-items: center;">
+   
+    <div class="center">
 
-        <div>
+        <h1>Login</h1>
+
+     <form method="post">
+         <div class="text_filed">
+
+          <input type="text" id="username" name="username" required >
             <label for="username">Username</label>
-            <input type="text" id="username" name="username" required placeholder="ahmed-10">
-        </div>
+            <span></span>
+            
 
-        <br>
+          </div>
 
-        <div>
-            <label for="password">Password</label>
+          <br>
+
+          <div class="text_filed">
             <input type="password" id="password" name="password" required>
-        </div>
+            <label for="password">Password</label>
+            <span></span>
+            
+          </div>
 
-        <br>
-    <script src="/JavaScript/logIN.js"> login();</script>
+          <br>
+    
+            <div class="pass">
 
+              <input type="submit" value="Login" onclick="login();">
+              
+            </div>
 
-        <button type="submit" onclick="login();">Login</button>
-
-        <p>If you don't have an account? <a href="signUP.html">Register</a>.</p>
+             <div class="signup_link">If you don't have an account? <a href="signUP.html">Register</a>.</div>
+      </form>
     </div>
+   
 
     
 </body>
 </html>
+
+
+
+<!--  <button type="submit" onclick="login();">Login</button> 
+
+          <input type="text" placeholder="Search.." name="search">
+        <button type="submit"><i class="fa fa-search">search</i></button>
+  
+  
+  
+  
+  ->-->
