@@ -45,9 +45,18 @@
     </div>
 
 
-    <input type="text" id="review-text" placeholder="Write your review">
-    <button onclick="addReview()">Add Review</button>
-    <div id="review-box"></div>
+    <div class="review-section">
+      <h3>Reviews</h3>
+      <form id="review-form">
+          <textarea id="review-box" placeholder="Write your review here..." required></textarea>
+          <button type="submit">Post Review</button>
+      </form>
+      <div id="reviews-container">
+          <h4>Recent Reviews</h4>
+          <ul id="reviews-list"></ul>
+      </div>
+  </div>
+  
 
 
 </body>

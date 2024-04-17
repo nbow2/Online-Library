@@ -1,25 +1,14 @@
-var reviews = []; // Array to store reviews
-
-        function addReview() {
-            var reviewText = document.getElementById("review-text").value;
-            if (reviewText.trim() !== "") { // Check if the review text is not empty
-                reviews.push(reviewText); // Add the review to the array
-                drawReviews(); // Redraw the reviews
-            }
-            document.getElementById("review-text").value = ""; // Clear the review box after adding
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('review-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevents the form from submitting traditionally
+        var reviewBox = document.getElementById('review-box');
+        var reviewText = reviewBox.value; // Gets text from textarea
+        if (reviewText.trim() !== "") { // Checks if text isn't just empty or spaces
+            var reviewsList = document.getElementById('reviews-list');
+            var newReview = document.createElement('li');
+            newReview.textContent = reviewText; // Sets the text of the new list item to the review
+            reviewsList.appendChild(newReview); // Adds the new review to the list
+            reviewBox.value = ""; // Clears the textarea after submission
         }
-
-        function drawReviews() {
-            var reviewBox = document.getElementById("review-box");
-            var reviewList = "<ul>"; // Start a new unordered list
-            for (var i = 0; i < reviews.length; i++) {
-                reviewList += "<li>" + reviews[i] + " <button onclick='removeReview(" + i + ")'>Remove</button></li>"; // Add each review with a remove button
-            }
-            reviewList += "</ul>"; // Close the unordered list
-            reviewBox.innerHTML = reviewList; // Update the review box
-        }
-
-        function removeReview(index) {
-            reviews.splice(index, 1); // Remove the review at the specified index
-            drawReviews(); // Redraw the reviews
-        }
+    });
+});
