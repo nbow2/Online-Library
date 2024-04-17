@@ -18,6 +18,15 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("Username:", username);
         console.log("Password:", password);
 
+        // AJAX request to send the login credentials to the server
+        // Example:
+        // var formData = { username: username, password: password };
+        // var jsonFormData = JSON.stringify(formData);
+        // var xhr = new XMLHttpRequest();
+        // xhr.open("POST", "your-server-endpoint", true);
+        // xhr.setRequestHeader("Content-Type", "application/json");
+        // xhr.send(jsonFormData);
+
       
     }
 
