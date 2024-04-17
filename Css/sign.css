@@ -47,7 +47,7 @@ form .text_field {
 .text_field input {
     width: 100%;
     padding: 0 5px;
-    height: 30px;
+    height: 10px;
     font-size: 16px;
     border: none;
     background:none ;
