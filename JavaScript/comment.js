@@ -1,3 +1,5 @@
+
+
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('review-form').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevents the form from submitting traditionally
