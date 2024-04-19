@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+.book-details {
+    margin: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 300px;
+}
+.book-cover {
+    max-width: 100%;
+    height: auto;
+}

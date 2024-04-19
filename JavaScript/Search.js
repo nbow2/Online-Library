@@ -5,7 +5,11 @@ const books = [
     { title: "1984", author: "George Orwell", category: "Dystopian" },
     { title: "Harry Potter and the Philosopher's Stone", author: "J.K. Rowling", category: "Fantasy" },
     { title: "The Catcher in the Rye", author: "J.D. Salinger", category: "Classic" },
+
+// add more books later 
 ];
+
+
 
 // Function to search for books
 function searchBooks() {

@@ -1,48 +1,81 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Function to handle form submission
-    function login() {
-        // Retrieve form input values
-        var username = document.getElementById("username").value;
-        var password = document.getElementById("password").value;
+document.addEventListener('DOMContentLoaded', function() {
+    
+    const validUser = {
+        username: 'user',
+        password: '12345'
+    };
 
-        // Perform basic validation
-        if (username === "" || password === "") {
-            alert("Please fill in all fields.");
+  
+    const form = document.querySelector('form');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+
+    
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+       
+        const enteredUsername = usernameInput.value.trim();
+        const enteredPassword = passwordInput.value.trim();
+
+        // Reset previous error messages
+        resetErrorMessages();
+
+        // Validate username
+        if (enteredUsername === '') {
+            showError(usernameInput, 'Username is required');
             return;
         }
 
-        // You can perform further validation here if needed
+        // Validate password
+        if (enteredPassword === '') {
+            showError(passwordInput, 'Password is required');
+            return;
+        }
 
-        // If all validation passed, you can proceed with form submission
-        // For demonstration purposes, let's just log the input values
-        console.log("Username:", username);
-        console.log("Password:", password);
+        // Check if the entered username and password match the valid credentials
+        if (enteredUsername !== validUser.username || enteredPassword !== validUser.password) {
+            showError(usernameInput, 'Invalid username or password');
+            return;
+        }
 
-        // AJAX request to send the login credentials to the server
-        // var formData = { username: username, password: password };
-        // var jsonFormData = JSON.stringify(formData);
-        // var xhr = new XMLHttpRequest();
-        // xhr.open("POST", "your-server-endpoint", true);
-        // xhr.setRequestHeader("Content-Type", "application/json");
-        // xhr.send(jsonFormData);
-
-      
-    }
-
-    // Attach login function to the form submit button click event
-    document.querySelector(SubmitEvent).addEventListener("click", function(event) {
-        event.preventDefault(); // Prevent the default form submission behavior
-        login(); 
+        // If all validations pass, you can submit the form
+        window.location.href = 'index.html';
+        console.log('Login successful!');
     });
-});
 
+    function showError(input, message) {
+        
+        const parent = input.parentElement;
 
+        
+        parent.classList.add('error');
 
-function check(usertype) {
+       
+        let errorSpan = parent.querySelector('.error-message');
+        if (!errorSpan) {
+    
+            errorSpan = document.createElement('span');
+            errorSpan.classList.add('error-message');
+            // Append the error message span to the parent element
+            parent.appendChild(errorSpan);
+        }
 
-    if (!document.getElementById("usertype") )
-    window.location.href = `AdminMenu.html?id=${usertype}`;
-    else{
-        Window.location.href = `index.html?id=${usertype}`;
+        // Set the error message text
+        errorSpan.innerText = message;
     }
-}
+
+    function resetErrorMessages() {
+        // Get all elements with the 'error' class
+        const errorElements = document.querySelectorAll('.error');
+
+
+        errorElements.forEach(function(element) {
+            element.classList.remove('error');
+            const errorSpan = element.querySelector('.error-message');
+            if (errorSpan) {
+                errorSpan.remove();
+            }
+        });
+    }
+});
