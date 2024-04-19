@@ -8,6 +8,10 @@ function calculateBookedDays() {
         alert('Please select a start and end date');
         return false;
     }
+    let today = new Date();
+    if(StartDate < today || EndDate <= today){
+        alter('Please select start date and end date after Today');
+    }
 
     // Convert start and end dates to Date objects
     var StartDate = new Date(StartDay);
