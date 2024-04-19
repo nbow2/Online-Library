@@ -3,38 +3,31 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-    height: 100vh;
+    height: 300vh;
     overflow: hidden;
     color: black;
     background: linear-gradient(120deg, black , white);
 }
 
 .center {
-    position: absolute;
+  /**/  position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+   /**/ transform: translate(-50%, -50%);
     width: 400px;
     background: #c1c1c1 ;
     border-radius: 30px;
-    -webkit-border-radius: 30px;
-    -moz-border-radius: 30px;
-    -ms-border-radius: 30px;
-    -o-border-radius: 30px;
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
+    
 }
 
 .center h1 {
     text-align: center;
-    padding: 0 0 20px 0;
+    padding: 0 0 30px 0;
     border-bottom: 1px solid silver;
 }
 
 .center form {
-    padding: 0 30px ;
+    padding: 0px 30px ;
     box-sizing: border-box;
 }
 
@@ -47,7 +40,7 @@ form .text_field {
 .text_field input {
     width: 100%;
     padding: 0 5px;
-    height: 10px;
+    height: 9px;
     font-size: 16px;
     border: none;
     background:none ;

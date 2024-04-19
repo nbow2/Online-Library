@@ -15,18 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
-        if (password !== rePassword) {
-            alert("Passwords or username do not match.");
-            return;
-        }
-
-        if (userType != "user") 
-        {
-            alert("")
-
-            return is_admin ;
-        }
-
+       
         // You can perform further validation here if needed
 
         // If all validation passed, you can proceed with form submission

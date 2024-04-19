@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("Password:", password);
 
         // AJAX request to send the login credentials to the server
-        // Example:
         // var formData = { username: username, password: password };
         // var jsonFormData = JSON.stringify(formData);
         // var xhr = new XMLHttpRequest();
@@ -33,6 +32,17 @@ document.addEventListener("DOMContentLoaded", function() {
     // Attach login function to the form submit button click event
     document.querySelector(SubmitEvent).addEventListener("click", function(event) {
         event.preventDefault(); // Prevent the default form submission behavior
-        login(); // Call the login function
+        login(); 
     });
 });
+
+
+
+function check(usertype) {
+
+    if (!document.getElementById("usertype") )
+    window.location.href = `AdminMenu.html?id=${usertype}`;
+    else{
+        Window.location.href = `index.html?id=${usertype}`;
+    }
+}
