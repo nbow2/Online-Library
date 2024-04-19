@@ -1,88 +1,133 @@
-// **********************************************************************************************************************************************
-// ********************* This is myCode Add, Edit, and delete functions and save the books in the local storage *********************************
-// **********************************************************************************************************************************************
-
 $(document).ready(function() {
-    // Load existing books from localStorage
-    var books = JSON.parse(localStorage.getItem('books')) || [];
+    let books = [];
 
-    // Function to display books
-    function displayBooks() {
-        $("#bookTable tbody").empty(); // Clear existing table rows
-        books.forEach(function(book, index) {
-            $("#bookTable tbody").append("<tr><td>" + book.title + "</td><td>" + book.author + "</td><td>" + book.id + "</td><td>" + book.category + "</td><td>" + book.description + "</td><td><button class='btn btn-danger btn-sm deleteBtn' data-index='" + index + "'>Delete</button> <button class='btn btn-primary btn-sm editBtn' data-index='" + index + "'>Edit</button></td></tr>");
-        });
+    function addBook(book) {
+        let table = $("#bookTable tbody");
+        table.append(`
+    <tr id="${book.id}">
+    <td>${book.title}</td>
+    <td>${book.author}</td>
+    <td>${book.description}</td>
+    <td>${book.category}</td>
+    <td>
+    <button class="btn btn-sm btn-warning editBtn" data-id="${book.id}">
+    Edit
+    </button>
+    </td>
+    <td>
+    <button class="btn btn-sm btn-danger deleteBtn" data-id="${book.id}">
+    Delete
+    </button>
+    </td>
+    `);
     }
 
-    // Display existing books on page load
-    displayBooks();
+    function clearForm() {
+        $("#bookTitle").val("");
+        $("#author").val("");
+        $("#bookDesc").val("");
+        $("#bookCategory").val("");
+    }
 
-    // Function to add a book
-    $("#bookform").submit(function(event) {
-        event.preventDefault(); // Prevent the form from submitting normally
-        // Get input values
-        var title = $("#bookTitle").val();
-        var author = $("#Author").val();
-        var id = $("#bookID").val();
-        var category = $("#bookCategory").val();
-        var description = $("#bookDesc").val();
+    function generatedId() {
+        return Math.floor(Math.random() * 1000000);
+    }
 
-        // Create a new book object
-        var newBook = {
-            title: title,
-            author: author,
-            id: id,
-            category: category,
-            description: description
+    $(document).on("click", "#clearBtn", function () {
+        clearForm();
+    });
+
+    $("#bookForm").submit(function (e) {
+        e.preventDefault();
+        let book = {
+            id: generatedId(),
+            title: $("#bookTitle").val(),
+            author: $("#author").val(),
+            category: $("#bookCategory").val(),
+            description: $("#bookDesc").val(),
         };
+        books.push(book);
+        addBook(book);
 
-        // Add the new book to the books array
-        books.push(newBook);
-
-        // Save the updated books array to localStorage
-        localStorage.setItem('books', JSON.stringify(books));
-
-        // Display the updated list of books
-        displayBooks();
-
-        // Clear input fields
-        $("#bookTitle").val("");
-        $("#Author").val("");
-        $("#bookID").val("");
-        $("#bookCategory").val("");
-        $("#bookDesc").val("");
+        clearForm();
     });
 
-    // Function to delete a book
-    $(document).on("click", ".deleteBtn", function() {
-        var index = $(this).data("index");
-        books.splice(index, 1); // Remove the book from the array
-        localStorage.setItem('books', JSON.stringify(books)); // Save the updated array to localStorage
-        displayBooks(); // Update the displayed list of books
+    $("#editfForm").submit(function (e){
+        e.preventDefault();
+
+        let bookID=$("#editBookId").val();
+        let bookIndex = books.findIndex((book)=> book.id == bookId);
+        let book = books[bookIndex];
+
+        book.title = $("#editbookTitle");
+        book.author = $("#editauthor");
+        book.category = $("#editbookCategory");
+        book.description = $("#editbookDesc");
+
+        let row = $('#${book.id}');
+        row.find("td:eq(0)").text(book.title);
+        row.find("td:eq(1)").text(book.author);
+        row.find("td:eq(2)").text(book.category);
+        row.find("td:eq(3)").text(book.description);
+
+        $("#editModal").modal("hide");
     });
 
-    // Function to edit a book
-    $(document).on("click", ".editBtn", function() {
-        var index = $(this).data("index");
-        var book = books[index];
-        // Populate form fields with current book details
-        $("#bookTitle").val(book.title);
-        $("#Author").val(book.author);
-        $("#bookID").val(book.id);
-        $("#bookCategory").val(book.category);
-        $("#bookDesc").val(book.description);
-        // Remove the edited book from the array
-        books.splice(index, 1);
-        localStorage.setItem('books', JSON.stringify(books)); // Save the updated array to localStorage
-        displayBooks(); // Update the displayed list of books
+/*
+    // Your existing code goes here
+    $("#editForm").submit(function (e) {
+        e.preventDefault();
+
+        let bookID = $("#editBookID").val(); // corrected variable name
+        let bookIndex = books.findIndex((book) => book.id == bookID); // corrected variable name
+        let book = books[bookIndex];
+
+        book.title = $("#editbookTitle").val(); // corrected selector
+        book.author = $("#editauthor").val(); // corrected selector
+        book.category = $("#editbookCategory").val(); // corrected selector
+        book.description = $("#editbookDesc").val(); // corrected selector
+
+        let row = $(`#${book.id}`);
+        row.find("td:eq(0)").text(book.title);
+        row.find("td:eq(1)").text(book.author);
+        row.find("td:eq(2)").text(book.category);
+        row.find("td:eq(3)").text(book.description);
+
+        $("#editModal").modal("hide");
     });
 
-    // Function to clear all input fields
-    $("#clearBtn").click(function() {
-        $("#bookTitle").val("");
-        $("#Author").val("");
-        $("#bookID").val("");
-        $("#bookCategory").val("");
-        $("#bookDesc").val("");
+    // Existing click event handler for editBtn
+
+    */
+
+
+    $(document).on("click", ".editBtn", function () {
+        let bookId = $(this).data("id");
+
+        let bookIndex = books.findIndex((book) => book.id == bookId);
+        let book = books[bookIndex];
+
+        $("#editbookTitle").val(book.title);
+        $("#editauthor").val(book.author);
+        $("#editbookDesc").val(book.description);
+        $("#editbookCategory").val(book.category);
+       // $("#editId").val(book.id);
+
+        $("#editModal").modal("show");
     });
+});
+
+$(document).on("click", "clsBtn", function () {
+    $("#editModal").modal("hide");
+});
+
+$(document).on("click", "deleteBtn", function () {
+    let bookId = $(this).data("id");
+
+    let bookIndex = books.findIndex((book) => book.id == bookId);
+    let book = books[bookIndex];
+    if(confirm(`Are you sure you want to delete ${book.title}`)){
+        books.splice(bookIndex,1);
+        $('#${book.id}').remove();
+    }
 });
