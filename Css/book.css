@@ -53,6 +53,11 @@ body {
     margin-right: 20px;
 }
 
+img{
+    width: 178 ;
+    height: 284;
+}
+
 .details {
     flex: 1;
 }
