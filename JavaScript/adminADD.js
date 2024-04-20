@@ -8,6 +8,7 @@ $(document).ready(function() {
             <tr id="${book.id}">
                 <td>${book.title}</td>
                 <td>${book.author}</td>
+                <td>${book.id}</td>
                 <td>${book.category}</td>
                 <td>${book.description}</td>
                 <td>
@@ -28,6 +29,7 @@ $(document).ready(function() {
     function clearForm() {
         $("#bookTitle").val("");
         $("#author").val("");
+        $("#bookID").val("");
         $("#bookCategory").val("");
         $("#bookDesc").val("");
     }
