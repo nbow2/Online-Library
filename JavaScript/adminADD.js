@@ -34,11 +34,6 @@ $(document).ready(function() {
         $("#bookDesc").val("");
     }
 
-    // Function to generate a random ID
-    function generateId() {
-        return Math.floor(Math.random() * 1000000);
-    }
-
     // Event listener for clearing form fields
     $(document).on("click", "#clearBtn", function () {
         clearForm();
@@ -47,8 +42,18 @@ $(document).ready(function() {
     // Event listener for adding a book
     $("#bookForm").submit(function (e) {
         e.preventDefault();
+        let bookId = $("#bookID").val(); // Read the book ID from the input field
+        if (!bookId) {
+            alert("Please enter a valid ID for the book.");
+            return;
+        }
+        // Check if the book ID is already used by another book
+        if (books.some(book => book.id === bookId)) {
+            alert("ID already exists. Please enter a unique ID for the book.");
+            return;
+        }
         let book = {
-            id: generateId(),
+            id: bookId, // Set the book ID
             title: $("#bookTitle").val(),
             author: $("#author").val(),
             category: $("#bookCategory").val(),
@@ -60,7 +65,7 @@ $(document).ready(function() {
     });
 
     // Event listener for editing a book
-    $("#editForm").submit(function (e) {
+    $(document).on("submit", "#editForm", function (e) {
         e.preventDefault();
 
         let bookId = $("#editBookId").val();
@@ -75,8 +80,9 @@ $(document).ready(function() {
         let row = $(`#${book.id}`);
         row.find("td:eq(0)").text(book.title);
         row.find("td:eq(1)").text(book.author);
-        row.find("td:eq(2)").text(book.category);
-        row.find("td:eq(3)").text(book.description);
+        row.find("td:eq(2)").text(book.id);
+        row.find("td:eq(3)").text(book.category);
+        row.find("td:eq(4)").text(book.description);
 
         $("#editModal").modal("hide");
     });
