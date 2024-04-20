@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Css/navBar.css">
+    <link rel="stylesheet" href="../Css/book.css">
+    <title>Library of Egypt</title>
+    <script defer src="../JavaScript/comment.js"></script>
+    <script defer src="../JavaScript/dynamicDisplay.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html">Library of Egypt</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+            <li><a href="Search.html">Search</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="AccountD.html">account</a></li>
+            <li><a href="list.html">list</a></li>
+            </ul>
+            <div class="login-button">
+                <a href="logIN.html">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="book-details">
+            <img src="../img/Kindness_is_my_Power.jpg" alt="Book Cover" class="book-cover">
+            <div class="details">
+                <h2>Kindness is my Superpower</h2>
+                <p><strong>Author:</strong> Alicia Ortego</p>
+                <p><strong>Published:</strong> July 27, 2020</p>
+                <p><strong>Category:</strong> Children's Book</p>
+                <p><strong>Description:</strong> Kindness is my Superpower is a heartwarming children's book that teaches about empathy, kindness, and compassion. It's part of the "My Superpower Books" series, designed to inspire and educate young readers about important values.</p>
+                <br>
+                <a href="../html/booktime.html" class="borrow-button">Borrow Now</a>
+            </div>
+        </div>
+    </div>
+    
+     
+
+    <div class="review-section">
+      <h3>Reviews</h3>
+      <form id="review-form">
+          <textarea id="review-box" placeholder="Write your review here..." required></textarea>
+          <button type="submit">Post Review</button>
+      </form>
+      <div id="reviews-container">
+          <h4>Recent Reviews</h4>
+          <ul id="reviews-list"></ul>
+      </div>
+  </div>
+  
+
+
+</body>
+</html>
