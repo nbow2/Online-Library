@@ -1,10 +1,11 @@
 // Sample 
 const books = [
-    { title: "The Great Gatsby", author: "F. Scott Fitzgerald", category: "Classic" },
-    { title: "To Kill a Mockingbird", author: "Harper Lee", category: "Classic" },
-    { title: "1984", author: "George Orwell", category: "Dystopian" },
-    { title: "Harry Potter and the Philosopher's Stone", author: "J.K. Rowling", category: "Fantasy" },
-    { title: "The Catcher in the Rye", author: "J.D. Salinger", category: "Classic" },
+    { title: "The Great Gatsby", author: "F. Scott Fitzgerald", category: "Classic",  BookPage: "../html/Book.html" },
+    { title: "To Kill a Mockingbird", author: "Harper Lee", category: "Classic" , BookPage: "../html/Book2.html" },
+    { title: "1984", author: "George Orwell", category: "Dystopian" , BookPage: "../html/Book4.html" },
+    { title: "Harry Potter and the Philosopher's Stone", author: "J.K. Rowling", category: "Fantasy" , BookPage: "../html/Book5.html" },
+    { title: "The Catcher in the Rye", author: "J.D. Salinger", category: "Classic" ,BookPage: "../html/Book6.html" },
+    { title: "C Programming" ,author: "F. Scott Fitzgerald", category: "code" , BookPage: "../html/Book3.html" } ,
 
 // add more books later 
 ];
@@ -31,9 +32,9 @@ function searchBooks() {
             const bookDiv = document.createElement("div");
             bookDiv.innerHTML = `<strong>Title:</strong> ${book.title}, <strong>Author:</strong> ${book.author}, <strong>Category:</strong> ${book.category}`;
             const detailsButton = document.createElement("button");
-            detailsButton.textContent = "Borrow";
+            detailsButton.textContent = "View";
             detailsButton.onclick = function() {
-                viewBookDetails(book.id);
+                viewBookDetails(book.BookPage);
             };
             bookDiv.appendChild(detailsButton);
             resultsDiv.appendChild(bookDiv);
@@ -43,7 +44,7 @@ function searchBooks() {
     }
 }
 
-function viewBookDetails(title) {
+function viewBookDetails(page) {
     // Redirect to book details page with bookId
-    window.location.href = `book.html?id=${title}`;
+    window.location.href = page;
 }

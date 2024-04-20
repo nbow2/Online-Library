@@ -10,24 +10,22 @@ document.addEventListener("DOMContentLoaded", function() {
         var userType = document.querySelector('input[name="title"]:checked').value;
 
         // Perform basic validation
-        if (name === "" || username === "" || email === "" || password === "" || rePassword === "" || userType === "") {
+        if (name === "" && username === "" && email === "" &&password === "" && rePassword === "" && userType === "") {
             alert("Please fill in all fields.");
             return;
         }
 
-       
-        // You can perform further validation here if needed
 
-        // If all validation passed, you can proceed with form submission
-        // For demonstration purposes, let's just log the input values
+        // If all validation passed
+        // For demonstration purposes
         console.log("Name:", name);
         console.log("Username:", username);
         console.log("Email:", email);
         console.log("Password:", password);
         console.log("User Type:", userType);
 
-        // Here you can make an AJAX request to send the form data to the server
-        // Example:
+        // AJAX request to send the form data to the server
+        // Example
         // var formData = { name: name, username: username, email: email, password: password, userType: userType };
         // var jsonFormData = JSON.stringify(formData);
         // var xhr = new XMLHttpRequest();
