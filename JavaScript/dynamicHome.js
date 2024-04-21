@@ -48,7 +48,7 @@ function displayBooks() {
             <img src="${book.cover}" alt="Book Cover" class="book-cover">
             <div class="details">
                 
-                <p><strong>title:</strong> ${book.title}</p>
+                <p><strong></strong> ${book.title}</p>
                 <br>
                 <a href="${book.borrowLink}" class="borrow-button">Show details</a>
             </div>

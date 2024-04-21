@@ -1,15 +1,12 @@
 body {
-    background-color: #1d2330;
-    color: white;
+    background-color: #fafafa;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100vh;
+  
+    color: black;
+    background: linear-gradient(120deg, black , white);
 }
 
-#bookTable
-{
-    color: white;
-}
-
-.modal
-{
-    color: #000;
-}
 
