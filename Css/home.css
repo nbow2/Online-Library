@@ -22,10 +22,6 @@ body {
     max-width: 100%;
     height: auto;
 }
-img{
-    width: 178 ;
-    height: 284;
-}
 
 
 #review-form button {
@@ -63,7 +59,17 @@ img{
 }
 
 .container {
+
+    text-align: center;
     display: flex;
     justify-content: center;
     padding: 20px;
 }
+
+
+
+.text{
+
+    text-align: center;
+}
+
