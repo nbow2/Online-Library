@@ -1,63 +1,63 @@
-$(document).ready(function() {
+document.addEventListener("DOMContentLoaded", function() {
     let books = [];
 
     // Function to add a book to the table
     function addBook(book) {
-        let table = $("#bookTable tbody");
-        table.append(`
-            <tr id="${book.id}">
-                <td>${book.title}</td>
-                <td>${book.author}</td>
-                <td>${book.id}</td>
-                <td>${book.category}</td>
-                <td>${book.description}</td>
-                <td>
-                    <button class="btn btn-sm btn-warning editBtn" data-id="${book.id}">
-                        Edit
-                    </button>
-                </td>
-                <td>
-                    <button class="btn btn-sm btn-danger deleteBtn" data-id="${book.id}">
-                        Delete
-                    </button>
-                </td>
-            </tr>
-        `);
+        let table = document.querySelector("#bookTable tbody");
+        let row = document.createElement("tr");
+        row.id = book.id;
+        row.innerHTML = `
+            <td>${book.title}</td>
+            <td>${book.author}</td>
+            <td>${book.id}</td>
+            <td>${book.category}</td>
+            <td>${book.description}</td>
+            <td>
+                <button class="btn btn-sm btn-warning editBtn" data-id="${book.id}">
+                    Edit
+                </button>
+            </td>
+            <td>
+                <button class="btn btn-sm btn-danger deleteBtn" data-id="${book.id}">
+                    Delete
+                </button>
+            </td>
+        `;
+        table.appendChild(row);
     }
 
     // Function to clear the form fields
     function clearForm() {
-        $("#bookTitle").val("");
-        $("#author").val("");
-        $("#bookID").val("");
-        $("#bookCategory").val("");
-        $("#bookDesc").val("");
+        document.getElementById("bookTitle").value = "";
+        document.getElementById("author").value = "";
+        document.getElementById("bookID").value = "";
+        document.getElementById("bookCategory").value = "";
+        document.getElementById("bookDesc").value = "";
     }
 
     // Event listener for clearing form fields
-    $(document).on("click", "#clearBtn", function () {
+    document.getElementById("clearBtn").addEventListener("click", function () {
         clearForm();
     });
 
     // Event listener for adding a book
-    $("#bookForm").submit(function (e) {
+    document.getElementById("bookForm").addEventListener("submit", function (e) {
         e.preventDefault();
-        let bookId = $("#bookID").val(); // Read the book ID from the input field
+        let bookId = document.getElementById("bookID").value;
         if (!bookId) {
             alert("Please enter a valid ID for the book.");
             return;
         }
-        // Check if the book ID is already used by another book
         if (books.some(book => book.id === bookId)) {
             alert("ID already exists. Please enter a unique ID for the book.");
             return;
         }
         let book = {
-            id: bookId, // Set the book ID
-            title: $("#bookTitle").val(),
-            author: $("#author").val(),
-            category: $("#bookCategory").val(),
-            description: $("#bookDesc").val(),
+            id: bookId,
+            title: document.getElementById("bookTitle").value,
+            author: document.getElementById("author").value,
+            category: document.getElementById("bookCategory").value,
+            description: document.getElementById("bookDesc").value,
         };
         books.push(book);
         addBook(book);
@@ -65,57 +65,61 @@ $(document).ready(function() {
     });
 
     // Event listener for editing a book
-    $(document).on("submit", "#editForm", function (e) {
+    document.getElementById("editForm").addEventListener("submit", function (e) {
         e.preventDefault();
 
-        let bookId = $("#editBookId").val();
+        let bookId = document.getElementById("editBookId").value;
         let bookIndex = books.findIndex((book) => book.id == bookId);
         let book = books[bookIndex];
 
-        book.title = $("#editbookTitle").val();
-        book.author = $("#editauthor").val();
-        book.category = $("#editbookCategory").val();
-        book.description = $("#editbookDesc").val();
+        book.title = document.getElementById("editbookTitle").value;
+        book.author = document.getElementById("editauthor").value;
+        book.category = document.getElementById("editbookCategory").value;
+        book.description = document.getElementById("editbookDesc").value;
 
-        let row = $(`#${book.id}`);
-        row.find("td:eq(0)").text(book.title);
-        row.find("td:eq(1)").text(book.author);
-        row.find("td:eq(2)").text(book.id);
-        row.find("td:eq(3)").text(book.category);
-        row.find("td:eq(4)").text(book.description);
+        let row = document.getElementById(book.id);
+        row.children[0].textContent = book.title;
+        row.children[1].textContent = book.author;
+        row.children[2].textContent = book.id;
+        row.children[3].textContent = book.category;
+        row.children[4].textContent = book.description;
 
-        $("#editModal").modal("hide");
+        document.getElementById("editModal").style.display = "none";
     });
 
     // Event listener for editing button click
-    $(document).on("click", ".editBtn", function () {
-        let bookId = $(this).data("id");
-        let bookIndex = books.findIndex((book) => book.id == bookId);
-        let book = books[bookIndex];
+    document.addEventListener("click", function (e) {
+        if (e.target.classList.contains("editBtn")) {
+            let bookId = e.target.getAttribute("data-id");
+            let bookIndex = books.findIndex((book) => book.id == bookId);
+            let book = books[bookIndex];
 
-        $("#editbookTitle").val(book.title);
-        $("#editauthor").val(book.author);
-        $("#editbookCategory").val(book.category);
-        $("#editbookDesc").val(book.description);
-        $("#editBookId").val(book.id);
+            document.getElementById("editbookTitle").value = book.title;
+            document.getElementById("editauthor").value = book.author;
+            document.getElementById("editbookCategory").value = book.category;
+            document.getElementById("editbookDesc").value = book.description;
+            document.getElementById("editBookId").value = book.id;
 
-        $("#editModal").modal("show");
+            document.getElementById("editModal").style.display = "block";
+        }
     });
 
     // Event listener for closing modal
-    $(document).on("click", "#clsBtn", function () {
-        $("#editModal").modal("hide");
+    document.getElementById("clsBtn").addEventListener("click", function () {
+        document.getElementById("editModal").style.display = "none";
     });
 
     // Event listener for deleting a book
-    $(document).on("click", ".deleteBtn", function () {
-        let bookId = $(this).data("id");
-        let bookIndex = books.findIndex((book) => book.id == bookId);
-        let book = books[bookIndex];
+    document.addEventListener("click", function (e) {
+        if (e.target.classList.contains("deleteBtn")) {
+            let bookId = e.target.getAttribute("data-id");
+            let bookIndex = books.findIndex((book) => book.id == bookId);
+            let book = books[bookIndex];
 
-        if (confirm(`Are you sure you want to delete ${book.title}`)) {
-            books.splice(bookIndex, 1);
-            $(`#${book.id}`).remove();
+            if (confirm(`Are you sure you want to delete ${book.title}`)) {
+                books.splice(bookIndex, 1);
+                document.getElementById(book.id).remove();
+            }
         }
     });
 });
