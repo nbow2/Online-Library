@@ -4,14 +4,13 @@ body {
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
     height: 300vh;
-    overflow: hidden;
     color: black;
     background: linear-gradient(120deg, black , white);
 }
 
 .center {
   /**/  position: absolute;
-    top: 50%;
+    top: 70%;
     left: 50%;
    /**/ transform: translate(-50%, -50%);
     width: 400px;
@@ -40,7 +39,7 @@ form .text_field {
 .text_field input {
     width: 100%;
     padding: 0 5px;
-    height: 9px;
+    height: 15px;
     font-size: 16px;
     border: none;
     background:none ;

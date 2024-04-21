@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Css/navBar.css">
-    <link rel="stylesheet" href="../Css/Admin.css">
-    <link rel="website icon" ref="../img/" href="../img/Library_of_Egypt.jpg">
-    <title>Add Book - Online Library</title>
-   
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../Css/navBar.css">
+<link rel="stylesheet" href="../Css/Admin.css">
+  <link rel="website icon" ref="../img/" href="../img/Library_of_Egypt.jpg">
+
+  <title>Add New Book</title>
+  <style>
+
+  </style>
 </head>
 <body>
 
@@ -20,7 +23,7 @@
                 <li><a href="index.html">Home</a></li>
             <li><a href="Search.html">Search</a></li>
             <li><a href="about.html">About</a></li>
-            <li><a href="adminADD.html">Admin Menu</a></li>
+            <li><a href="AccountD.html">account</a></li>
             <li><a href="list.html">list</a></li>
             </ul>
             <div class="login-button">
@@ -29,121 +32,51 @@
         </div>
     </nav>
 
-<!--    <h1>Add Book</h1>-->
-<!--    <form action="add_book_handler.php" method="post" enctype="multipart/form-data">-->
-<!--        <label for="title">Title:</label><br>-->
-<!--        <input type="text" id="title" name="title"><br><br>-->
-<!--        <label for="author">Author:</label><br>-->
-<!--        <input type="text" id="author" name="author"><br><br>-->
-<!--        <label for="description">Description:</label><br>-->
-<!--        <textarea id="description" name="description" rows="4" cols="50"></textarea><br><br>-->
-<!--        <label for="aAvailable" >Available books</label>-->
-<!--        <input type="number" id="Available" name="Available"><br><br>-->
-<!--        <label for="book_image">Upload Book Image:</label><br>-->
-<!--        <input type="file" id="book_image" name="book_image"><br><br>-->
-<!--        <input type="submit" value="Submit">-->
-<!--    </form>-->
-<div class="container mb-5">
-    <h1 class="text-center mb-5">Add Book</h1>
-    <form action="" id="bookForm">
-        <div class="form-group mb-3">
-            <label for="bookTitle">Book title:</label>
-                <input type="text" id="bookTitle" class="form-control" placeholder="enter book title" required>
-        </div>
+<h2>Add New Book</h2>
 
-        <div class="form-group mb-3">
-            <label for="author">Author :</label>
-            <input type="text" id="author" class="form-control" placeholder="enter author name" required>
-        </div>
+<form id="bookForm">
+  <label for="title">Title:</label>
+  <input type="text" id="title" name="title" required>
 
-        <div class="form-group mb-3">
-            <label for="bookID">ID :</label>
-            <input type="text" id="bookID" class="form-control" placeholder="enter book ID" required>
-        </div>
+  <label for="author">Author:</label>
+  <input type="text" id="author" name="author" required>
 
-        <div class="form-group mb-3">
-            <label for="bookCategory">Category :</label>
-            <input type="text" id="bookCategory" class="form-control" placeholder="enter book category" required>
-        </div>
+  <label for="yearOfPublish">Year of Publish:</label>
+  <input type="date" id="yearOfPublish" name="yearOfPublish" required>
 
-        <div class="form-group mb-3">
-            <label for="bookDesc">Description :</label>
-            <input type="text" id="bookDesc" class="form-control" placeholder="enter book description" required>
-        </div>
+  <label for="category">Category:</label>
+  <input type="text" id="category" name="category" required>
 
-        <button class="btn btn-success" type="submit" id="addBtn">Add book</button>
-        <button class="btn btn-warning m1-2" type="button" id="clearBtn">Clear all</button>
+  <label for="description">Description:</label>
+  <textarea id="description" name="description" rows="4" required></textarea>
 
-    </form>
+  <label for="isbn">ID:</label>
+  <input type="number" id="isbn" name="isbn" required>
 
-    <table class="table mt-4" id="bookTable">
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>ID</th>
-            <th>Category</th>
-            <th>Description</th>
-            <th>action</th>
+  <label for="image">Image URL:</label>
+  <input type="text" id="image" name="image" required>
 
-        </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-</div>
-<div class="modal fade" id="editModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Edit Book</h4>
-            </div>
-            <div class="modal-body">
-                <form action="" id="editForm">
-                   <div class="form-group mb-3"></div>
-                    <div class="form-group mb-3">
-                        <label for="editbookTitle">Book title:</label>
-                        <input type="text" id="editbookTitle" class="form-control" placeholder="enter book title" required>
-                    </div>
+  <input type="submit" value="Add Book">
+</form>
 
-                    <div class="form-group mb-3">
-                        <label for="editauthor">Author :</label>
-                        <input type="text" id="editauthor" class="form-control" placeholder="enter author name" required>
-                    </div>
+<h2>Added Books</h2>
+<table id="addedBooks">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Year of Publish</th>
+      <th>Category</th>
+      <th>Description</th>
+      <th>ID</th>
+      <th>Image</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
 
-                    <div class="form-group mb-3">
-                        <label for="editId">ID :</label>
-                        <input type="text" id="editId" class="form-control" placeholder="enter book ID" required>
-                    </div>
+<script src="../JavaScript/adminADD.js"></script>
 
-                    <div class="form-group mb-3">
-                        <label for="editbookCategory">Category :</label>
-                        <input type="text" id="editbookCategory" class="form-control" placeholder="enter book category" required>
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label for="editbookDesc">Description :</label>
-                        <input type="text" id="editbookDesc" class="form-control" placeholder="enter book description" required>
-                    </div>
-                   <input type="hidden" id="editBookId">
-                    <button class="btn btn-success" type="submit" id="editBtn">Save changes</button>
-                    <button class="btn btn-danger m1-2" type="button" id="clsBtn" data-dismiss="modal">Close</button>
-
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-    
-    <script src="../JavaScript/adminADD.js"></script>
 </body>
 </html>
