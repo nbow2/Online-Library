@@ -21,7 +21,7 @@ body {
     width: 350px;
 }
 .book-cover {
-    max-width: 200PX;
+    width: 160PX;
     height: 200PX;
 }
 
@@ -76,3 +76,6 @@ body {
     text-align: center;
 }
 
+.details{
+    width: 100%;
+}

@@ -30,7 +30,7 @@ const books = [
         borrowLink: "../html/The_Cat_in_the_hatBook.html"
     },
     {
-        title: "Clean Code",
+        title: "Clean Code     ",
        cover: "../img/clean_code.jpg",
         borrowLink: "../html/clean_codeBook.html"
     },
