@@ -2,7 +2,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const validUser = {
         username: 'user',
-        password: '12345'
+        password: '12345',
+        role: 'user' // Assigning a role to the user
+    };
+
+    const admin = {
+        username: "admin",
+        password: "12345",
+        role: 'admin' // Assigning a role to the admin
     };
 
   
@@ -33,14 +40,25 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
+        let user; // Variable to store user object
+
         // Check if the entered username and password match the valid credentials
-        if (enteredUsername !== validUser.username || enteredPassword !== validUser.password) {
+        if (enteredUsername === validUser.username && enteredPassword === validUser.password) {
+            user = validUser;
+        } else if (enteredUsername === admin.username && enteredPassword === admin.password) {
+            user = admin;
+        } else {
             showError(usernameInput, 'Invalid username or password');
             return;
         }
 
-        // If all validations pass, you can submit the form
-        window.location.href = 'index.html';
+        // Redirect based on user's role
+        if (user.role === 'user') {
+            window.location.href = 'index.html';
+        } else if (user.role === 'admin') {
+            window.location.href = 'adminADD.html';
+        }
+        
         console.log('Login successful!');
     });
 
