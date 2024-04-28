@@ -15,6 +15,12 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
+        if(password === rePassword) {
+            return true
+        } else {
+            return false;
+        }
+
 
         // If all validation passed
         // For demonstration purposes

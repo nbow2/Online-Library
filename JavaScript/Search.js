@@ -5,7 +5,7 @@ const books = [
     { title: "1984", author: "George Orwell", category: "Dystopian" , BookPage: "../html/Book4.html" },
     { title: "Harry Potter and the Philosopher's Stone", author: "J.K. Rowling", category: "Fantasy" , BookPage: "../html/Book5.html" },
     { title: "The Catcher in the Rye", author: "J.D. Salinger", category: "Classic" ,BookPage: "../html/Book6.html" },
-    { title: "C Programming" ,author: "F. Scott Fitzgerald", category: "code" , BookPage: "../html/Book3.html" } ,
+    { title: "C Programming" ,author: "F. Scott Fitzgerald", category: "code" , BookPage: "../html/C_progbook.html" } ,
     { title: "The Cat in the Hat" ,author: "Dr. Seuss", category: "Children's Book" , BookPage: "../html/The_Cat_in_the_hatBook.html"},
     { title: "Kindness is my Superpower", author: "Alicia Ortego", category: "Children's Book" , BookPage: "../html/Kindness_is_my_PowerBook.html"},
     {title: "Enceladus", author: "Arthur C. Clarke", category: "Science Fiction" , BookPage: "../html/EnceladusBook.html"},
