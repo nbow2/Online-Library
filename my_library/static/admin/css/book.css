@@ -1,0 +1,91 @@
+body {
+    background-color: #fafafa;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100vh;
+  
+    color: black;
+    background: linear-gradient(120deg, black , white);
+}
+
+.logo a, .nav-menu a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.nav-menu {
+    list-style-type: none;
+    display: flex;
+}
+
+.borrow-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.borrow-button:hover {
+    background-color: #0056b3;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.book-details {
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    display: flex;
+    max-width: 800px;
+    border-radius: 20px;
+}
+
+.book-cover {
+    max-width: 200px;
+    margin-right: 20px;
+}
+
+img{
+    width: 178 ;
+    height: 284;
+}
+
+.details {
+    flex: 1;
+}
+.review-section {
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#review-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    height: 100px; /* Makes the textarea a bit taller */
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+#review-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#review-form button:hover {
+    background-color: #0056b3;
+}
+
