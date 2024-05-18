@@ -1,17 +1,16 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="{% static 'img/Library_of_Egypt.jpg' %}" type="image/jpg">
-    <script defer src="{% static 'JS/BookTime.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'Css/navBar.css' %}">
-    <link rel="stylesheet" href="{% static 'Css/time.css' %}">
+    <link rel="stylesheet" href="{% static 'members/css/navBar.css' %}">
+    <link rel="stylesheet" href="{% static 'members/css/home.css' %}">
+    <link rel="icon" href="{% static 'members/img/Library_of_Egypt.jpg' %}">
     <title>Library of Egypt</title>
 </head>
 <body>
+    <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
@@ -30,17 +29,18 @@
         </div>
     </nav>
 
-    <div class="container">
-        <form method="post" class="container">
-            <div class="time">
-                <label for="startDate">Start Day</label>
-                <input type="date" name="startDate" id="startDate"><br>
-                <label for="endDate">End Day</label>
-                <input type="date" name="endDate" id="endDate"><br>
-                <input type="submit" name="Submit" class="submit" onclick="calculateBookedDays()">
-                <p id="result"></p>
-            </div>
-        </form>
+    <br><br>
+
+    <div class="text">
+        <div>
+            <h1>Discover Your Next Favorite Book</h1>
+            <p>Welcome to our online library. Explore our vast collection of books in various genres and topics.</p>
+        </div>    
     </div>
+
+    <!-- Container for dynamically loaded books -->
+    <div class="container" id="bookContainer"></div>
+
+    <script src="{% static 'members/js/dynamicHome.js' %}"></script>
 </body>
 </html>

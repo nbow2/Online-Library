@@ -1,16 +1,15 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/navBar.css' %}">
-    <link rel="stylesheet" href="{% static 'css/book.css' %}">
-    <link rel="icon" href="{% static 'img/Library_of_Egypt.jpg' %}">
+    <link rel="stylesheet" href="{% static 'members/css/navBar.css' %}">
+    <link rel="stylesheet" href="{% static 'members/css/book.css' %}">
+    <link rel="icon" href="{% static 'members/img/Library_of_Egypt.jpg' %}">
     <title>Library of Egypt</title>
-    <script defer src="{% static 'js/comment.js' %}"></script>
-    <script defer src="{% static 'js/dynamicDisplay.js' %}"></script>
+    <script defer src="{% static 'members/js/comment.js' %}"></script>
+    <script defer src="{% static 'members/js/dynamicDisplay.js' %}"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -31,22 +30,20 @@
         </div>
     </nav>
 
-
     <div class="container">
         <div class="book-details">
-            <img src="{% static 'img/Enceladus.jpg' %}" alt="Book Cover" class="book-cover">
+            <img src="{% static 'members/img/Kindness_is_my_Power.jpg' %}" alt="Book Cover" class="book-cover">
             <div class="details">
-                <h2>Enceladus</h2>
-                <p><strong>Author:</strong> Arthur C. Clarke</p>
-                <p><strong>Published:</strong> 1983</p>
-                <p><strong>Category:</strong> Science Fiction</p>
-                <p><strong>Description:</strong> Enceladus is a science fiction novel by Arthur C. Clarke. It follows the story of a space expedition to the moon of Saturn, Enceladus, where a mysterious discovery leads to profound revelations about the nature of the solar system.</p>
+                <h2>Kindness is my Superpower</h2>
+                <p><strong>Author:</strong> Alicia Ortego</p>
+                <p><strong>Published:</strong> July 27, 2020</p>
+                <p><strong>Category:</strong> Children's Book</p>
+                <p><strong>Description:</strong> Kindness is my Superpower is a heartwarming children's book that teaches about empathy, kindness, and compassion. It's part of the "My Superpower Books" series, designed to inspire and educate young readers about important values.</p>
                 <br>
-                <a href="{% static 'html/booktime.html' %}" class="borrow-button">Borrow Now</a>
+                <a href="{% url 'booktime' %}" class="borrow-button">Borrow Now</a>
             </div>
         </div>
     </div>
-    
 
     <div class="review-section">
       <h3>Reviews</h3>

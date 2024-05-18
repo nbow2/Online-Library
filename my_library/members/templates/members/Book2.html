@@ -5,12 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'Css/navBar.css' %}">
-    <link rel="stylesheet" href="{% static 'Css/book.css' %}">
-    <link rel="icon" href="{% static 'img/Library_of_Egypt.jpg' %}" type="image/jpg">
-    <title>Library of Egypt</title>
-    <script defer src="{% static 'JavaScript/comment.js' %}"></script>
-    <script defer src="{% static 'JavaScript/dynamicDisplay.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'members/css/navBar.css' %}">
+    <link rel="stylesheet" href="{% static 'members/css/book.css' %}">
+    
+    <title>Book Details</title>
+    <script src="{% static 'members/js/comment.js' %}"></script>
+</head>
 </head>
 <body>
     <nav class="navbar">
@@ -30,22 +30,23 @@
             </div>
         </div>
     </nav>
-
-
     <div class="container">
         <div class="book-details">
-            <img src="{% static 'img/clean_code.jpg' %}" alt="Book Cover" class="book-cover">
+            <img src="{% static 'members/img/Enceladus.jpg' %}" alt="Book Cover" class="book-cover">
             <div class="details">
-                <h2>Clean Code</h2>
-                <p><strong>Author:</strong> Robert C. Martin</p>
-                <p><strong>Published:</strong> 2008</p>
-                <p><strong>Category:</strong> Programming, Software Development</p>
-                <p><strong>Description:</strong> Clean Code is a book by Robert C. Martin that focuses on writing clean, readable, and maintainable code. It covers principles, practices, and examples to help developers improve their coding skills and create better software.</p>
+
+                <!--To Kill a Mockingbird", author: "Harper Lee", category: "Classic"-->
+                <h2>To Kill a Mockingbird</h2>
+                <p><strong>Author:</strong> Harper Lee</p>
+                <p><strong>Published:</strong> 1925</p>
+                <p><strong>category:</strong> Fiction, Classic</p>
+                <p><strong>Description:</strong> The Great Gatsby is a novel by American author F. Scott Fitzgerald. Set in the Jazz Age on Long Island, the novel depicts narrator Nick's interactions with mysterious millionaire Jay Gatsby and Gatsby's obsession to reunite with his former lover, Daisy Buchanan.</p>
                 <br>
                 <a href="{% url 'booktime' %}" class="borrow-button">Borrow Now</a>
             </div>
         </div>
     </div>
+
 
     <div class="review-section">
       <h3>Reviews</h3>
@@ -58,5 +59,6 @@
           <ul id="reviews-list"></ul>
       </div>
   </div>
+
 </body>
 </html>
