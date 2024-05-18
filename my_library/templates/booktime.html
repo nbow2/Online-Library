@@ -1,61 +1,46 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="website icon" ref="../img/" href="../img/Library_of_Egypt.jpg">
-    <script defer src="../JS/BookTime.js"></script>
-    <link rel="stylesheet" href="../Css/navBar.css">
-    <link rel="stylesheet" href="../Css/time.css">
-    <title>Library of Egypt </title>
+    <link rel="icon" href="{% static 'img/Library_of_Egypt.jpg' %}" type="image/jpg">
+    <script defer src="{% static 'JS/BookTime.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'Css/navBar.css' %}">
+    <link rel="stylesheet" href="{% static 'Css/time.css' %}">
+    <title>Library of Egypt</title>
 </head>
 <body>
-
-
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
-                <a href="index.html">Library of Egypt</a>
+                <a href="{% url 'Home' %}">Library of Egypt</a>
             </div>
             <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="Search.html">Search</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="AccountD.html">account</a></li>
-                <li><a href="list.html">list</a></li>
+                <li><a href="{% url 'Home' %}">Home</a></li>
+                <li><a href="{% url 'Search' %}">Search</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                {% comment %} <li><a href="{% url 'account' %}">Account</a></li> {% endcomment %}
+                <li><a href="{% url 'list' %}">List</a></li>
             </ul>
             <div class="login-button">
-                <a href="logIN.html">Login</a>
+                <a href="{% url 'Log_in' %}">Login</a>
             </div>
         </div>
     </nav>
 
-
-
-
-
-
     <div class="container">
-
-    <form  method="post" class="container" >
-
-        <div class="time">
-        
-        <label for="startDate">Start Day</label>
-        <input type="date" name="startDate" id="startDate"><br>
-    
-
-        <label for="endDate">End Day</label>
-        <input type="date" name="endDate" id="endDate"><br>
-
-        <input  type="submit" name="Submit" class="submit" onclick="calculateBookedDays()">
-        <p id="result" ></p>
-
+        <form method="post" class="container">
+            <div class="time">
+                <label for="startDate">Start Day</label>
+                <input type="date" name="startDate" id="startDate"><br>
+                <label for="endDate">End Day</label>
+                <input type="date" name="endDate" id="endDate"><br>
+                <input type="submit" name="Submit" class="submit" onclick="calculateBookedDays()">
+                <p id="result"></p>
+            </div>
+        </form>
     </div>
-    
-    </form>
-
-    </div>
-    
 </body>
 </html>

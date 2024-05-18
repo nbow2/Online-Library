@@ -4,57 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!--  <link rel="stylesheet" href="/Css/file.css"> -->
-  <link rel="website icon" ref="../img/" href="img/Library_of_Egypt.jpg">
-            <link rel="stylesheet" href="{% static 'css/navBar.css' %}">
-            <link rel="stylesheet" href="{% static 'css/home.css' %}">
-            <script src="{% static 'js/dynamicHome.js' %}"></script>
-            <title>Library of Egypt</title>
+    <link rel="stylesheet" href="{% static 'css/navBar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="icon" href="{% static 'img/Library_of_Egypt.jpg' %}">
+    <script src="{% static 'js/dynamicHome.js' %}"></script>
+    <title>Library of Egypt</title>
 </head>
 <body>
-    
-    
-
-   <!--               /*  nav bar  */       Home about search list       --> 
-
-   <nav class="navbar">
-    <div class="nav-container">
-        <div class="logo">
-            <a href="index.html">Library of Egypt</a>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="{% url 'Home' %}">Library of Egypt</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="{% url 'Home' %}">Home</a></li>
+                <li><a href="{% url 'Search' %}">Search</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                {% comment %} <li><a href="{% url 'account' %}">Account</a></li> {% endcomment %}
+                <li><a href="{% url 'list' %}">List</a></li>
+            </ul>
+            <div class="login-button">
+                <a href="{% url 'Log_in' %}">Login</a>
+            </div>
         </div>
-        <ul class="nav-menu">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="Search.html">Search</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="AccountD.html">account</a></li>
-            <li><a href="list.html">list</a></li>
-        </ul>
-        <div class="login-button">
-            <a href="logIN.html">Login</a>
-        </div>
-    </div>
-</nav>
+    </nav>
+
     <br><br>
 
-    
     <div class="text">
         <div>
             <h1>Discover Your Next Favorite Book</h1>
             <p>Welcome to our online library. Explore our vast collection of books in various genres and topics.</p>
-            
         </div>    
     </div>
 
-
-
-
-     <!-- Book dynamically page -->
-     <div class="container" id="bookContainer">
-        
-     </div>
-
-
-    
+    <!-- Container for dynamically loaded books -->
+    <div class="container" id="bookContainer"></div>
     
 </body>
 </html>

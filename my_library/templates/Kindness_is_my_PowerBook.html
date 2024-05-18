@@ -1,37 +1,38 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Css/navBar.css">
-    <link rel="stylesheet" href="../Css/book.css">
-    <link rel="website icon" ref="../img/" href="../img/Library_of_Egypt.jpg">
+    <link rel="stylesheet" href="{% static 'css/navBar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/book.css' %}">
+    <link rel="icon" href="{% static 'img/Library_of_Egypt.jpg' %}">
     <title>Library of Egypt</title>
-    <script defer src="../JavaScript/comment.js"></script>
-    <script defer src="../JavaScript/dynamicDisplay.js"></script>
+    <script defer src="{% static 'js/comment.js' %}"></script>
+    <script defer src="{% static 'js/dynamicDisplay.js' %}"></script>
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
-                <a href="index.html">Library of Egypt</a>
+                <a href="{% url 'Home' %}">Library of Egypt</a>
             </div>
             <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-            <li><a href="Search.html">Search</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="AccountD.html">account</a></li>
-            <li><a href="list.html">list</a></li>
+                <li><a href="{% url 'Home' %}">Home</a></li>
+                <li><a href="{% url 'Search' %}">Search</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                {% comment %} <li><a href="{% url 'account' %}">Account</a></li> {% endcomment %}
+                <li><a href="{% url 'list' %}">List</a></li>
             </ul>
             <div class="login-button">
-                <a href="logIN.html">Login</a>
+                <a href="{% url 'Log_in' %}">Login</a>
             </div>
         </div>
     </nav>
 
     <div class="container">
         <div class="book-details">
-            <img src="../img/Kindness_is_my_Power.jpg" alt="Book Cover" class="book-cover">
+            <img src="{% static 'img/Kindness_is_my_Power.jpg' %}" alt="Book Cover" class="book-cover">
             <div class="details">
                 <h2>Kindness is my Superpower</h2>
                 <p><strong>Author:</strong> Alicia Ortego</p>
@@ -43,8 +44,6 @@
             </div>
         </div>
     </div>
-    
-     
 
     <div class="review-section">
       <h3>Reviews</h3>
@@ -57,8 +56,5 @@
           <ul id="reviews-list"></ul>
       </div>
   </div>
-  
-
-
 </body>
 </html>
