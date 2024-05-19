@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management</title>
+</head>
+<body>
+    <h2>Library Management</h2>
+
+    <!-- Form for adding a new book -->
+    <h3>Add New Book</h3>
+    <form method="POST" action="{% url 'add_book' %}">
+        {% csrf_token %}
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br>
+
+        <!-- Add other fields for author, year of publish, category, description, ISBN, and image URL -->
+        
+        <input type="submit" value="Add Book">
+    </form>
+
+    <!-- List of existing books with options to update or delete -->
+    <h3>Existing Books</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Year of Publish</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>ISBN</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.year_of_publish }}</td>
+                <td>{{ book.category }}</td>
+                <td>{{ book.description }}</td>
+                <td>{{ book.isbn }}</td>
+                <td>{{ book.image_url }}</td>
+                <td>
+                    <!-- Form for updating book details -->
+                    <form method="POST" action="{% url 'update_book' book.id %}">
+                        {% csrf_token %}
+                        <!-- Add input fields with book details -->
+                        <input type="submit" value="Update">
+                    </form>
+                    <!-- Form for deleting a book -->
+                    <form method="POST" action="{% url 'delete_book' book.id %}">
+                        {% csrf_token %}
+                        <input type="submit" value="Delete">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

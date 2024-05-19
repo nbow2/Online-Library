@@ -81,10 +81,13 @@
                 <td>{{ book.description }}</td>
                 <td>{{ book.isbn }}</td>
                 <td><img style="width:50px;" src="{{ book.image_url }}" alt="Book Cover"></td>
+                <td>
+                    <button  class="botton_edit" onclick="editRow(this, {{ book.id }})">Edit</button>
+                    <button class="botton_delete" onclick="deleteRow(this, {{ book.id }})">Delete</button>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
-        
     </table>
 
     <script src="{% static 'members/js/adminADD.js' %}"></script>

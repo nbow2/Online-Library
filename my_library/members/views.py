@@ -7,6 +7,8 @@ from django.template import loader
 from django.shortcuts import render , redirect, get_object_or_404
 from .models import Book
 from .forms import BookForm
+from django.http import JsonResponse
+
 
 # To Shorthand the code
 # def render_template(request, template_name):
@@ -66,13 +68,15 @@ def The_Cat_in_the_hatBook(request):
 
 # admin roleplay will use this methods
 
-from django.shortcuts import render, redirect
-from django.http import JsonResponse
-from .models import Book
+
 
 def book_list(request):
+    # Retrieve all books from the database
     books = Book.objects.all()
-    return render(request, 'your_app/book_list.html', {'books': books})
+    print(books)
+    # Render the adminADD.html template and pass the list of books to the template context
+    return render(request, 'members/adminADD.html', {'books': books})
+
 
 def add_book(request):
     if request.method == 'POST':
@@ -116,3 +120,19 @@ def update_book(request, book_id):
             return JsonResponse({'success': False})
     return JsonResponse({'success': False})
 
+def book_management(request):
+    if request.method == 'POST':
+        # If the form is submitted
+        form = BookForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('book_management')
+    else:
+        # If the page is accessed via GET request
+        form = BookForm()
+
+    # Get all books from the database
+    books = Book.objects.all()
+
+    # Render the template with the form and book data
+    return render(request, 'members/book_management.html', {'form': form, 'books': books})

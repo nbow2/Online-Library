@@ -10,7 +10,7 @@ class Member(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=200)
-    year_of_publish = models.IntegerField()
+    year_of_publish = models.DateField((""), auto_now=False, auto_now_add=False)
     category = models.CharField(max_length=100)
     description = models.TextField()
     isbn = models.CharField(max_length=13)
