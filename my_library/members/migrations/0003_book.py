@@ -21,6 +21,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField()),
                 ('isbn', models.CharField(max_length=13)),
                 ('image_url', models.URLField(max_length=2000)),
+                ('available' ,  models.BooleanField(default=True)),
             ],
         ),
     ]
