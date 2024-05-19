@@ -1,64 +1,90 @@
+// static/members/js/adminADD.js
+
 document.getElementById('bookForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent form submission
+    var formData = new FormData(this);
 
-    // Get form data
-    var title = document.getElementById('title').value;
-    var author = document.getElementById('author').value;
-    var yearOfPublish = document.getElementById('yearOfPublish').value;
-    var category = document.getElementById('category').value;
-    var description = document.getElementById('description').value;
-    var isbn = document.getElementById('isbn').value;
-    var imageUrl = document.getElementById('image').value;
+    fetch("/add/", {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            location.reload(); // Reload the page to update the book list
+        } else {
+            alert('Error adding book');
+        }
+    });
+});
 
-    // Create new book row
-    var newRow = document.createElement('tr');
-    newRow.innerHTML = '<td>' + title + '</td><td>' + author + '</td><td>' + yearOfPublish + '</td><td>' + category + '</td><td>' + description + '</td><td>' + isbn + '</td><td><img style="width:50px;" src="' + imageUrl + '" alt="Book Cover"></td><td><button class="botton_delete" onclick="deleteRow(this)">Delete</button> <button class="botton_edit" onclick="editRow(this)">Edit</button></td>';
+function deleteRow(button, bookId) {
+    fetch("/delete/" + bookId + "/", {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+        }
+    }).then(response => {
+        if (response.ok) {
+            button.closest('tr').remove();
+        } else {
+            alert('Error deleting book');
+        }
+    });
+}
 
-    // Append new row to the table body
-    document.querySelector('#addedBooks tbody').appendChild(newRow);
+function editRow(button, bookId) {
+    var row = button.closest('tr');
+    var cells = row.querySelectorAll('td');
 
-    // Clear form fields
-    document.getElementById('title').value = '';
-    document.getElementById('author').value = '';
-    document.getElementById('yearOfPublish').value = '';
-    document.getElementById('category').value = '';
-    document.getElementById('description').value = '';
-    document.getElementById('isbn').value = '';
-    document.getElementById('image').value = '';
-  });
-
-  function deleteRow(button) {
-    var row = button.parentNode.parentNode;
-    row.parentNode.removeChild(row);
-  }
-
-  function editRow(button) {
-    var row = button.parentNode.parentNode;
-    var cells = row.cells;
-
- 
-    for (var i = 0; i < cells.length - 1; i++) {
+    for (var i = 0; i < cells.length - 2; i++) {
         var cellValue = cells[i].textContent;
         cells[i].innerHTML = '<input type="text" value="' + cellValue + '">';
     }
 
-    // Change the edit button to a save button
     button.textContent = 'Save';
-    button.onclick = function() { saveRow(this); };
+    button.onclick = function() { saveRow(button, bookId); };
 }
 
-function saveRow(button) {
-    var row = button.parentNode.parentNode;
-    var cells = row.cells;
+function saveRow(button, bookId) {
+    var row = button.closest('tr');
+    var inputs = row.querySelectorAll('input');
+    var formData = new FormData();
 
-    // Replace input fields with the edited values
-    for (var i = 0; i < cells.length - 1; i++) { // -1 to exclude the action column
-        var input = cells[i].querySelector('input');
-        var newValue = input.value;
-        cells[i].textContent = newValue;
+    inputs.forEach((input, index) => {
+        formData.append(input.name, input.value);
+    });
+
+    fetch("/update/" + bookId + "/", {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+        }
+    }).then(response => {
+        if (response.ok) {
+            location.reload();
+        } else {
+            alert('Error saving book');
+        }
+    });
+}
+
+// Utility function to get the CSRF token from cookies
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
     }
-
-    // Change the save button back to an edit button
-    button.textContent = 'Edit';
-    button.onclick = function() { editRow(this); };
+    return cookieValue;
 }

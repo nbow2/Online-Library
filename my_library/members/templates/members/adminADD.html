@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'members/css/navBar.css' %}">
     <link rel="stylesheet" href="{% static 'members/css/Admin.css' %}">
-    
     <link rel="icon" href="{% static 'members/img/Library_of_Egypt.jpg' %}">
     <title>Library of Egypt</title>
     <style>
@@ -22,8 +21,7 @@
                 <li><a href="{% url 'Home' %}">Home</a></li>
                 <li><a href="{% url 'Search' %}">Search</a></li>
                 <li><a href="{% url 'about' %}">About</a></li>
-             {% comment %} <li><a href="{% url 'account' %}">Account</a></li> {% endcomment %}
-             <li><a href="{% url 'list' %}">List</a></li>
+                <li><a href="{% url 'list' %}">List</a></li>
             </ul>
             <div class="login-button">
                 <a href="{% url 'Log_in' %}">Login</a>
@@ -33,46 +31,60 @@
 
     <h2>Add New Book</h2>
 
-    <form id="bookForm">
-      <label for="title">Title:</label>
-      <input type="text" id="title" name="title" required>
+    <form id="bookForm" method="POST" action="{% url 'add_book' %}">
+        {% csrf_token %}
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
 
-      <label for="author">Author:</label>
-      <input type="text" id="author" name="author" required>
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author" required>
 
-      <label for="yearOfPublish">Year of Publish:</label>
-      <input type="date" id="yearOfPublish" name="yearOfPublish" required>
+        <label for="yearOfPublish">Year of Publish:</label>
+        <input type="date" id="yearOfPublish" name="year_of_publish" required>
 
-      <label for="category">Category:</label>
-      <input type="text" id="category" name="category" required>
+        <label for="category">Category:</label>
+        <input type="text" id="category" name="category" required>
 
-      <label for="description">Description:</label>
-      <textarea id="description" name="description" rows="4" required></textarea>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" required></textarea>
 
-      <label for="isbn">ID:</label>
-      <input type="number" id="isbn" name="isbn" required>
+        <label for="isbn">ID:</label>
+        <input type="number" id="isbn" name="isbn" required>
 
-      <label for="image">Image URL:</label>
-      <input type="text" id="image" name="image" required>
+        <label for="image">Image URL:</label>
+        <input type="text" id="image" name="image_url" required>
 
-      <input type="submit" value="Add Book">
+        <input type="submit" value="Add Book">
     </form>
 
     <h2>Added Books</h2>
     <table id="addedBooks">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Author</th>
-          <th>Year of Publish</th>
-          <th>Category</th>
-          <th>Description</th>
-          <th>ID</th>
-          <th>Image</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Year of Publish</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.year_of_publish }}</td>
+                <td>{{ book.category }}</td>
+                <td>{{ book.description }}</td>
+                <td>{{ book.isbn }}</td>
+                <td><img style="width:50px;" src="{{ book.image_url }}" alt="Book Cover"></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        
     </table>
 
     <script src="{% static 'members/js/adminADD.js' %}"></script>

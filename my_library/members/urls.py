@@ -17,5 +17,15 @@ urlpatterns = [
     path('Search/', views.Search, name='Search'),
     path('Sign_up/', views.Sign_up, name='Sign_up'),
     path('The_Cat_in_the_hatBook/', views.The_Cat_in_the_hatBook, name='The_Cat_in_the_hatBook'),
+
+    #the admin roleplay 
+      path('add/', views.add_book, name='add_book'),
+    path('delete/<int:book_id>/', views.delete_book, name='delete_book'),
+    path('update/<int:book_id>/', views.update_book, name='update_book'),
+    path('', views.book_list, name='book_list'),
+   # path('admin/', admin.site.urls),
+   # path('members/', include('members.urls'))
+
     
 ]
+
