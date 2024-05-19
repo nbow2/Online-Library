@@ -5,10 +5,13 @@
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render , redirect, get_object_or_404
-from .models import Book
-from .forms import BookForm
+from .models import Book , UserType , Profile
+from .forms import BookForm 
 from django.http import JsonResponse
-
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate
+from django.contrib import messages
+from django.contrib.auth.hashers import make_password # for hashing
 
 # To Shorthand the code
 # def render_template(request, template_name):
@@ -42,12 +45,40 @@ def Log_in(request):
 
 def Search(request):
     return render(request, 'members/Search.html')
-
+    
+    
+    
 def Sign_up(request):
+    if request.method == 'POST':
+        # Extract form data from POST request
+        Name = request.POST.get('name')
+        email = request.POST.get('email')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        rePassword = request.POST.get('repassword')
+        userType = request.POST.get('usertype')
+        
+        if password != rePassword:
+            messages.error(request, "Password doesn't match the confirmation")
+            return render(request, 'members/signUP.html')  
+        
+        HashingPassword = make_password(password)
+
+        if Name and email and username and password and rePassword and userType:
+            user = UserType()
+            user.username = username
+            user.Name = Name
+            user.email = email
+            user.password = HashingPassword
+            user.IsAdmin = userType.lower() == 'admin'  
+            user.save()
+            messages.success(request, "User created successfully")
+            return render(request, 'members/logIN.html')  
+        else:
+            messages.error(request, "Please fill in all required fields")
+            return render(request, 'members/signUP.html')  
+
     return render(request, 'members/signUP.html')
-
-
-#this books will be delete 
 
 def C_programming_book(request):
     return render(request, 'members/C_progBook.html')

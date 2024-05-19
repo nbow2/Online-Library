@@ -31,7 +31,8 @@
 <body>
     <div class="center">
         <h1>Sign Up</h1>
-        <form id="signup-form">
+        <form id="signup-form" method="POST">
+            {% csrf_token %}
             <div class="text_field">
                 <input type="text" id="name" name="name" required>
                 <label for="name">Name</label>
@@ -55,14 +56,16 @@
             <div class="user_type">
                 <label>User Type</label>
                 <br>
-                <input type="radio" id="usertype" name="usertype" value="admin">
+                <input type="radio" id="usertype_admin" name="usertype" value="admin">
                 <label for="admin">Admin</label>
-                <input type="radio" id="usertype1" name="usertype" value="user">
+                <input type="radio" id="usertype_user" name="usertype" value="user">
                 <label for="user">User</label>
             </div>
+            {{ form.as_p }}
             <input type="submit" value="Sign Up">
-            <p class="signup_link">Already have an account? <a href="{% url 'Log_in' %} ">Login</a>.</p>
+            <p class="signup_link">Already have an account? <a href="{% url 'Log_in' %}">Login</a>.</p>
         </form>
     </div>
+    
 </body>
 </html>
