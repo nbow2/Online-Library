@@ -12,12 +12,12 @@ class UserType(models.Model):
         return self.username
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    usertype = models.ForeignKey(UserType, on_delete=models.CASCADE)
+    user = models.OneToOneField(UserType, on_delete=models.CASCADE)
+    userType = models.BooleanField(default=False)
     name = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.user.username
+        return f"profile by {self.user} on {self.name}"
 
 
 
@@ -35,7 +35,7 @@ class Book(models.Model):
         return self.title
 
 class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserType, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     text_comment = models.TextField()
 
