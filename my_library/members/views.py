@@ -18,6 +18,8 @@ from django.contrib.auth.hashers import make_password # for hashing
 #     template = loader.get_template(template_name)
 #     return HttpResponse(template.render(request=request))
 
+def account(request):
+    return render(request, 'members/account.html')
 
 def Home(request):
     return render(request, 'members/index.html')

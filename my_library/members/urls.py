@@ -18,6 +18,7 @@ urlpatterns = [
     path('Search/', views.Search, name='Search'),
     path('Sign_up/', views.Sign_up, name='Sign_up'),
     path('The_Cat_in_the_hatBook/', views.The_Cat_in_the_hatBook, name='The_Cat_in_the_hatBook'),
+    path('account/', views.account, name='account'),
 
     #the admin roleplay 
       path('add/', views.add_book, name='add_book'),

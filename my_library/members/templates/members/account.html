@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'members/css/navBar.css' %}">
+    <link rel="stylesheet" href="{% static 'members/css/account.css' %}">
+    <!---       add js code file in static + css          -->
+    
+    
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="{% url 'Home' %}">Library of Egypt</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="{% url 'Home' %}">Home</a></li>
+                <li><a href="{% url 'Search' %}">Search</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'list' %}">List</a></li>
+                {% if user.is_authenticated %}
+                    {% if user.is_staff %}
+                        <li><a href="{% url 'book_list' %}">Admin Menu</a></li>
+                    {% endif %}
+                    <div class="login-button"><a href="{% url 'account' %}">account</a> </div>
+                {% else %}
+                <div class="login-button"><a href="{% url 'Log_in' %}">Login</a> </div>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="center">
+        <h1>Account Details</h1>
+        <div class="account-info">
+            <p><strong>Username:</strong> <span id="account-username"></span></p>
+            <p><strong>Role:</strong> <span id="account-role"></span></p>
+        </div>
+        <div class="logout-button">
+            <button id="logout">Logout</button>
+        </div>
+    </div>
+
+</body>

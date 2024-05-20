@@ -31,7 +31,7 @@ class Book(models.Model):
     isbn = models.CharField(max_length=13)
     image_url = models.URLField()
     category = models.CharField(max_length=255)
-    year_of_publish = models.IntegerField()
+    year_of_publish = models.DateField()
     available = models.BooleanField(default=True)  # Indicates if the book is available for borrowing
 
     def __str__(self):
