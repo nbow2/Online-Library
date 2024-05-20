@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="{% static 'members/css/navBar.css' %}">
     <link rel="stylesheet" href="{% static 'members/css/sign.css' %}">
     <link rel="icon" href="{% static 'members/img/Library_of_Egypt.jpg' %}">
-    <script defer src="{% static 'members/js/signUp.js' %}"></script>
 </head>
 <nav class="navbar">
     <div class="nav-container">
@@ -65,7 +64,9 @@
             <input type="submit" value="Sign Up">
             <p class="signup_link">Already have an account? <a href="{% url 'Log_in' %}">Login</a>.</p>
         </form>
+        
     </div>
     
+    {% comment %} <script defer src="{% static 'members/js/signUp.js' %}"></script> {% endcomment %}
 </body>
 </html>

@@ -1,16 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     
-    const validUser = {
-        username: 'user',
-        password: '12345',
-        role: 'user' // Assigning a role to the user
-    };
-
-    const admin = {
-        username: "admin",
-        password: "12345",
-        role: 'admin' // Assigning a role to the admin
-    };
+    
 
   
     const form = document.querySelector('form');

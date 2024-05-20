@@ -10,7 +10,7 @@
     <link rel="icon" href="{% static 'img/Library_of_Egypt.jpg' %}">
     
     <title>Library of Egypt</title>
-    <script defer src="{% static 'members/js/logIN.js' %}"></script>
+    {% comment %} <script defer src="{% static 'members/js/logIN.js' %}"></script> {% endcomment %}
 </head>
 <body>
 
@@ -35,6 +35,7 @@
 <br><br>
 
 <div class="center">
+    {% csrf_token %}
     <h1>Login</h1>
     <form method="post">
         <div class="text_filed">
@@ -53,6 +54,7 @@
             <input type="submit" value="Login" onclick="login();">
         </div>
         <div class="signup_link">If you don't have an account? <a href="{% url 'Sign_up' %}">Register</a>.</div>
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
     </form>
 </div>
     

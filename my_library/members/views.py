@@ -43,7 +43,26 @@ def list(request):
     return render(request, 'members/list.html')
 
 def Log_in(request):
-    return render(request, 'members/logIN.html')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        hashPassword = make_password(password)
+        
+        result = None
+        users = UserType.objects.all()
+        
+        for i in users:
+            if(i.username == username and i.password == password):
+                result = i
+                break
+            
+        if result is not None:
+            # login(request, result)
+            return redirect('Home')
+        else:
+            return render(request, 'members/logIN.html', {'error_message': 'Invalid credentials'})
+    else:
+        return render(request, 'members/logIN.html')
 
 def Search(request):
     return render(request, 'members/Search.html')
@@ -71,13 +90,13 @@ def Sign_up(request):
             user.username = username
             user.Name = Name
             user.email = email
-            user.password = HashingPassword
+            user.password = password
             user.IsAdmin = userType.lower() == 'admin'  
             user.save()
             messages.success(request, "User created successfully")
-            return render(request, 'members/logIN.html')  
+            return redirect('Log_in')    
         else:
-            messages.error(request, "Please fill in all required fields")
+            # messages.error(request, "Please fill in all required fields")
             return render(request, 'members/signUP.html')  
 
     return render(request, 'members/signUP.html')
