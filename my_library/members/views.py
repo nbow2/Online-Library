@@ -5,11 +5,13 @@
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render , redirect, get_object_or_404
-from .models import Book , UserType , Profile
+from .models import Book  , Profile , User , UserType 
 from .forms import BookForm 
 from django.http import JsonResponse
+from django.contrib.auth.hashers import check_password
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
+from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password # for hashing
 
@@ -42,33 +44,35 @@ def booktime(request):
 def list(request):
     return render(request, 'members/list.html')
 
+@csrf_protect
 def Log_in(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        hashPassword = make_password(password)
-        
-        result = None
-        users = UserType.objects.all()
-        
-        for i in users:
-            if(i.username == username and i.password == password):
-                result = i
-                break
+       
+        try:
+            users = User.objects.all()
             
-        if result is not None:
-            # login(request, result)
-            return redirect('Home')
-        else:
-            return render(request, 'members/logIN.html', {'error_message': 'Invalid credentials'})
+            user = None
+            for i in users:
+                user = (i.username == username and i.password == password)
+            if(user is not None):    
+                data = {'username': username}
+                return render(request, 'members/index.html', data)
+            else:
+                messages.error(request, 'Invalid credentials')
+                return render(request, 'members/logIN.html')
+        except User.DoesNotExist:
+            messages.error(request, 'Invalid credentials')
+            return render(request, 'members/logIN.html')
     else:
         return render(request, 'members/logIN.html')
 
+
+
 def Search(request):
     return render(request, 'members/Search.html')
-    
-    
-    
+        
 def Sign_up(request):
     if request.method == 'POST':
         # Extract form data from POST request
@@ -82,21 +86,28 @@ def Sign_up(request):
         if password != rePassword:
             messages.error(request, "Password doesn't match the confirmation")
             return render(request, 'members/signUP.html')  
-        
+
         HashingPassword = make_password(password)
 
         if Name and email and username and password and rePassword and userType:
-            user = UserType()
-            user.username = username
-            user.Name = Name
-            user.email = email
-            user.password = password
-            user.IsAdmin = userType.lower() == 'admin'  
+            user = UserType(
+                Name=Name,
+                email=email,
+                username=username,
+                password=HashingPassword,
+                IsAdmin=userType.lower() == 'admin'
+            )
             user.save()
-            messages.success(request, "User created successfully")
-            return redirect('Log_in')    
+            profile = Profile(
+                user=user,
+                userType=userType.lower() == 'admin',
+                name=Name
+            )
+            profile.save()
+            messages.success(request, f"User created successfully for {username} :)")
+            return redirect('Log_in')
         else:
-            # messages.error(request, "Please fill in all required fields")
+            messages.error(request, "Please fill out all fields")
             return render(request, 'members/signUP.html')  
 
     return render(request, 'members/signUP.html')
