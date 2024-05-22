@@ -51,3 +51,24 @@ body {
 }
 
 
+.borrow-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.borrow-button:hover {
+    background-color: #0056b3;
+}
+
+.atag {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+}
+.details {
+    flex: 1;
+}

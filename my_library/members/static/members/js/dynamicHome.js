@@ -51,3 +51,32 @@ function displayBooks() {
 
 // Call the function to display books when the page loads
 window.onload = displayBooks;
+
+
+async function fetchBooks() {
+    const response = await fetch('/api/books/');
+    const books = await response.json();
+    displayBooks(books);
+}
+
+function displayBooks(books) {
+    const container = document.getElementById("bookContainer");
+    container.innerHTML = ""; // Clear previous content
+
+    books.forEach(book => {
+        const bookDiv = document.createElement("div");
+        bookDiv.classList.add("book-details");
+        bookDiv.innerHTML = `
+            <img src="${book.image_url}" alt="Book Cover" class="book-cover">
+            <div class="details">
+                <p><strong>${book.title}</strong></p>
+                <a href="/book/${book.id}/" class="borrow-button">Show details</a>
+            </div>
+        `;
+        container.appendChild(bookDiv);
+    });
+}
+
+// Call the function to fetch and display books when the page loads
+window.onload = fetchBooks;
+

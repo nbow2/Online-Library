@@ -6,6 +6,8 @@ from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render , redirect, get_object_or_404
 from .models import Book  , Profile , User , UserType 
+#for the Q 
+from django.db.models import Q  # Import Q here
 from .forms import BookForm 
 from django.http import JsonResponse
 from django.contrib.auth.hashers import check_password
@@ -23,8 +25,19 @@ from django.contrib.auth.hashers import make_password # for hashing
 def account(request):
     return render(request, 'members/account.html')
 
-def Home(request):
-    return render(request, 'members/index.html')
+# to show all the books from the database
+def home(request):
+    books = Book.objects.all()
+    return render(request, 'members/index.html', {'books': books})
+
+#this also not handed yat 
+# path('book/<int:id>/', views.book_detail, name='book_detail'),
+def book_detail(request):
+    return render(request ,'members/index.html' )
+
+def books_api(request):
+    books = Book.objects.all().values('title', 'image_url', 'id')
+    return JsonResponse(list(books), safe=False)
 
 def about(request):
     return render(request, 'members/about.html')
@@ -51,7 +64,7 @@ def Log_in(request):
         password = request.POST.get('password')
        
         try:
-            users = User.objects.all()
+            users = UserType.objects.all()
             
             user = None
             for i in users:
@@ -72,6 +85,24 @@ def Log_in(request):
 
 def Search(request):
     return render(request, 'members/Search.html')
+
+#this the new function tosearch from database 
+def search_books(request):
+    query = request.GET.get('q', '')
+    if query:
+        books = Book.objects.filter(
+            Q(title__icontains=query) | 
+            Q(author__icontains=query) |
+            Q(category__icontains=query)
+        )
+    else:
+        books = Book.objects.all()  # Display all books when there's no search query
+    
+    context = {
+        'books': books,
+        'query': query,
+    }
+    return render(request, 'members/search.html', context)
         
 def Sign_up(request):
     if request.method == 'POST':
@@ -101,7 +132,8 @@ def Sign_up(request):
             profile = Profile(
                 user=user,
                 userType=userType.lower() == 'admin',
-                name=Name
+                name=Name,
+                email = user.email()
             )
             profile.save()
             messages.success(request, f"User created successfully for {username} :)")

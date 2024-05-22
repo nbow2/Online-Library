@@ -23,8 +23,8 @@
                 <li><a href="{% url 'Search' %}">Search</a></li>
                 <li><a href="{% url 'about' %}">About</a></li>
                 <li><a href="{% url 'list' %}">List</a></li>
-                {% if user.is_authenticated %}
-                    {% if user.is_staff %}
+                {% if UserType.is_authenticated %}
+                    {% if UserType.is_staff %}
                         <li><a href="{% url 'book_list' %}">Admin Menu</a></li>
                     {% endif %}
                     <div class="login-button"><a href="{% url 'account' %}">account</a> </div>
@@ -41,8 +41,8 @@
         <div class="account-info">
             <p><strong>Username: {{user.username | default:""}} </strong> <span id="account-username"></span></p>
             <p><strong>Role:
-            {% if user.is_authenticated %}
-                {% if user.IsAdmin %}
+            {% if UserType.is_authenticated %}
+                {% if UserType.IsAdmin %}
                     Admin
                 {% else %}
                     User
@@ -54,7 +54,7 @@
             
         </div>
         <div class="logout-button">
-            <button id="logout">Logout</button>
+            <button id="logout" href="{% url 'Log_in' %}">Logout</button>
         </div>
     </div>
 

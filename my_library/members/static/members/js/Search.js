@@ -33,7 +33,12 @@ function searchBooks() {
     if (searchResults.length > 0) {
         searchResults.forEach(book => {
             const bookDiv = document.createElement("div");
-            bookDiv.innerHTML = `<strong>Title:</strong> ${book.title}, <strong>Author:</strong> ${book.author}, <strong>Category:</strong> ${book.category}`;
+            bookDiv.innerHTML = `
+            <br>
+            <strong>Title:</strong> ${book.title}, 
+            <strong>Author:</strong> ${book.author},
+             <strong>Category:</strong> ${book.category}
+             <br>`;
             const detailsButton = document.createElement("button");
             detailsButton.textContent = "View";
             detailsButton.onclick = function() {
@@ -50,4 +55,39 @@ function searchBooks() {
 function viewBookDetails(page) {
     // Redirect to book details page with bookId
     window.location.href = page;
+}
+
+
+
+//the new function for search books with backend 
+function searchBooks() {
+    const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+    const searchUrl = `/search/?q=${searchTerm}`;
+
+    fetch(searchUrl)
+        .then(response => response.json())
+        .then(data => {
+            const resultsDiv = document.getElementById("searchResults");
+            resultsDiv.innerHTML = ""; // Clear previous results
+            if (data.length > 0) {
+                data.forEach(book => {
+                    const bookDiv = document.createElement("div");
+                    bookDiv.classList.add("book-result");
+                    bookDiv.innerHTML = `
+                    <br>
+                    <strong>Title:</strong> ${book.title},
+                    <strong>Author:</strong> ${book.author},
+                    <strong>Category:</strong> ${book.category},
+                    <a href="/book/${book.id}/" class="borrow-button">View</a>
+                      <br>
+                      `;
+                    resultsDiv.appendChild(bookDiv);
+                });
+            } else {
+                resultsDiv.textContent = "No matching books found.";
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 }
