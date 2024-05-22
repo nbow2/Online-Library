@@ -8,6 +8,7 @@ from django.shortcuts import render , redirect, get_object_or_404
 from .models import Book  , Profile , User , UserType 
 #for the Q 
 from django.db.models import Q  # Import Q here
+from django.shortcuts import get_object_or_404
 from .forms import BookForm 
 from django.http import JsonResponse
 from django.contrib.auth.hashers import check_password
@@ -16,6 +17,13 @@ from django.contrib.auth import login, authenticate
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password # for hashing
+
+#this code should be in saprit file like Genrate_html_page.py
+from django.template.loader import render_to_string
+from django.conf import settings
+import os
+from .models import Book
+
 
 # To Shorthand the code
 # def render_template(request, template_name):
@@ -32,12 +40,32 @@ def home(request):
 
 #this also not handed yat 
 # path('book/<int:id>/', views.book_detail, name='book_detail'),
-def book_detail(request):
-    return render(request ,'members/index.html' )
+# def book_detail(request):
+   # return render(request ,'members/index.html' )
 
 def books_api(request):
     books = Book.objects.all().values('title', 'image_url', 'id')
     return JsonResponse(list(books), safe=False)
+
+# def book_details(request, isbn):
+  #  book = get_object_or_404(Book, pk=isbn)
+   # return render(request, 'members/book_details.html', {'book': book})
+
+def book_details(request, book_id):
+    book = get_object_or_404(Book, pk=book_id)
+    return render(request, 'members/book_details.html', {'book': book})
+
+def generate_html_pages_for_books():
+    books = Book.objects.all()
+    output_dir = os.path.join(settings.BASE_DIR, 'generated_books')
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    
+    for book in books:
+        rendered_html = render_to_string('members/book_details.html', {'book': book})
+        output_path = os.path.join(output_dir, f'book_{book.id}.html')
+        with open(output_path, 'w', encoding='utf-8') as file:
+            file.write(rendered_html)
 
 def about(request):
     return render(request, 'members/about.html')
@@ -133,7 +161,6 @@ def Sign_up(request):
                 user=user,
                 userType=userType.lower() == 'admin',
                 name=Name,
-                email = user.email()
             )
             profile.save()
             messages.success(request, f"User created successfully for {username} :)")

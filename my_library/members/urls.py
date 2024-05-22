@@ -6,8 +6,8 @@ urlpatterns = [
     path('', views.home, name='Home'),
    
     # this path is not handld yat 
-    path('book/<int:id>/', views.book_detail, name='book_detail'),
-     path('api/books/', views.books_api, name='books_api'),
+path('book/<int:book_id>/', views.book_details, name='book_details'),
+    # path('api/books/', views.books_api, name='books_api'),
 
     path('about/', views.about, name='about'),
     path('adminADD/', views.adminADD, name='adminADD'),
