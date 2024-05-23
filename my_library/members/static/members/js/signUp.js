@@ -30,16 +30,15 @@ function signUp() {
         alert("Passwords do not match.");
         return;
     }
+    localStorage.setItem('username' , username);
+    localStorage.setItem('name' , name);
+    localStorage.setItem('password' , password);
+    localStorage.setItem('email' , email);
+    localStorage.setItem('userType' , userType);
 
     // If all validation passed
-    console.log("Name:", name);
-    console.log("Username:", username);
-    console.log("Email:", email);
-    console.log("Password:", password);
-    console.log("User Type:", userType);
-
     // AJAX request to send the form data to the server
-//    Example
+    //    Example
     // var formData = { name: name, username: username, email: email, password: password, userType: userType };
     // var jsonFormData = JSON.stringify(formData);
     // var xhr = new XMLHttpRequest();

@@ -1,0 +1,13 @@
+
+.container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.reservation-message {
+    background-color: #dff0d8; /* Light green background */
+    color: #3c763d; /* Dark green text color */
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}

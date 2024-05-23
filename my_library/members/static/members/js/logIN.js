@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
        
         const enteredUsername = usernameInput.value.trim();
         const enteredPassword = passwordInput.value.trim();
-
+        localStorage.setItem('username' , enteredUsername)
         // Reset previous error messages
         resetErrorMessages();
 

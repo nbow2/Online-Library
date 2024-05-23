@@ -79,8 +79,17 @@ def Great_Gatsby(request):
 def Mockingbird(request):
     return render(request, 'members/Book2.html')
 
+
+def SuccessReservatino(request):
+    if request.user.is_authenticated:
+        return redirect('success_reserved')
+    return render(request , 'members/error.html')
+    
+
 def booktime(request):
-    return render(request, 'members/booktime.html')
+    if request.user.is_authenticated:
+        return render(request, 'members/booktime.html')
+    return render(request,'members/error.html')
 
 def list(request):
     return render(request, 'members/list.html')
@@ -97,12 +106,11 @@ def Log_in(request):
             user = None
             for i in users:
                 user = (i.username == username and i.password == password)
-            if(user is not None):    
-                data = {'username': username}
-                return render(request, 'members/index.html', data)
+            if(user is not None):
+                return redirect('Home')
             else:
                 messages.error(request, 'Invalid credentials')
-                return render(request, 'members/logIN.html')
+                return redirect(request, 'members/logIN.html')
         except User.DoesNotExist:
             messages.error(request, 'Invalid credentials')
             return render(request, 'members/logIN.html')

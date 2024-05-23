@@ -6,9 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{% static 'members/img/Library_of_Egypt.jpg' %}" type="image/jpg">
-    <script defer src="{% static 'members/JS/BookTime.js' %}"></script>
     <link rel="stylesheet" href="{% static 'members/css/navBar.css' %}">
-    <link rel="stylesheet" href="{% static 'members/css/time.css' %}">
+    <link rel="stylesheet" href="{% static 'members/css/successReserveBook.css' %}">
+
     <title>Library of Egypt</title>
 </head>
 <body>
@@ -21,7 +21,6 @@
                 <li><a href="{% url 'Home' %}">Home</a></li>
                 <li><a href="{% url 'Search' %}">Search</a></li>
                 <li><a href="{% url 'about' %}">About</a></li>
-                {% comment %} <li><a href="{% url 'account' %}">Account</a></li> {% endcomment %}
                 <li><a href="{% url 'list' %}">List</a></li>
             </ul>
             <div class="login-button">
@@ -34,17 +33,19 @@
         </div>
     </nav>
     <div class="container">
-        <form action="{% url 'success_reserved' %}" method="POST" onsubmit="return validateAndRedirect()"> 
-            {% csrf_token %}
-            <div class="time">
-                <label for="startDate">Start Day</label>
-                <input type="date" name="startDate" id="startDate"><br>
-                <label for="endDate">End Day</label>
-                <input type="date" name="endDate" id="endDate"><br>
-                <input type="submit" value="Submit" class="submit">
-                <p id="result"></p>
-            </div>
-        </form>
+        <h1>Book Reserved Successfully</h1>
+        <p id="reservationMessage" class="reservation-message"></p>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var startDate = localStorage.getItem('reservationStartDate');
+            var endDate = localStorage.getItem('reservationEndDate');
+            if (startDate && endDate) {
+                var message = 'Book reserved successfully from ' + startDate + ' to ' + endDate + '.';
+                document.getElementById('reservationMessage').textContent = message;
+            }
+        });
+    </script>
 </body>
 </html>

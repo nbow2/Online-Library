@@ -37,7 +37,8 @@ label {
 }
 
 input[type="date"],
-input[type="submit"] {
+input[type="submit"],
+ a[class="submit"]{
     padding: 8px 12px;
     margin-bottom: 10px;
     border: 1px solid #ccc;

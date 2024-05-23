@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'members/css/navBar.css' %}">
+    <link rel="stylesheet" href="{% static 'members/css/error404.css' %}">
+    <title>404 Not Found</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Login Required</h1>
+        <p>You need to log in to access this page.</p>
+        <p><a href="{% url 'Log_in' %}">Go to Login Page</a></p>
+    </div>
+</body>
+</html>

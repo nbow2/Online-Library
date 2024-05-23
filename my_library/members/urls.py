@@ -20,7 +20,7 @@ path('book/<int:book_id>/', views.book_details, name='book_details'),
     path('Kindness_is_my_PowerBook/', views.Kindness_is_my_PowerBook, name='Kindness_is_my_PowerBook'),
     path('list/', views.list, name='list'),
     path('Log_in/', views.Log_in, name='Log_in'),
-
+    path('success_reserved/' , views.SuccessReservatino , name = 'success_reserved'),
 
     path('Search/', views.Search, name='Search'),
     path('search/', views.search_books, name='search_books'),
