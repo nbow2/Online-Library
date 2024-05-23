@@ -16,7 +16,7 @@ const books = [
 
 
 // Function to search for books
-function searchBooks() {
+function searchBooks__() {
     const searchTerm = document.getElementById("searchInput").value.toLowerCase();
     const searchResults = books.filter(book => {
         // Check if the query matches title, author, or category
@@ -61,11 +61,16 @@ function viewBookDetails(page) {
 
 //the new function for search books with backend 
 function searchBooks() {
-    const searchTerm = document.getElementById("searchInput").value.toLowerCase();
-    const searchUrl = `/search/?q=${searchTerm}`;
+    const searchTerm = document.getElementById("searchInput").value.trim().toLowerCase();
+    const searchUrl = `/search/?q=${encodeURIComponent(searchTerm)}`;
 
     fetch(searchUrl)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            return response.json();
+        })
         .then(data => {
             const resultsDiv = document.getElementById("searchResults");
             resultsDiv.innerHTML = ""; // Clear previous results
@@ -74,13 +79,12 @@ function searchBooks() {
                     const bookDiv = document.createElement("div");
                     bookDiv.classList.add("book-result");
                     bookDiv.innerHTML = `
-                    <br>
-                    <strong>Title:</strong> ${book.title},
-                    <strong>Author:</strong> ${book.author},
-                    <strong>Category:</strong> ${book.category},
-                    <a href="/book/${book.id}/" class="borrow-button">View</a>
-                      <br>
-                      `;
+                        <strong>Title:</strong> ${book.title}<br>
+                        <strong>Author:</strong> ${book.author}<br>
+                        <strong>Category:</strong> ${book.category}<br>
+                        <a href="/book/${book.id}/" class="view-button">View</a>
+                        <br>
+                    `;
                     resultsDiv.appendChild(bookDiv);
                 });
             } else {
@@ -89,5 +93,7 @@ function searchBooks() {
         })
         .catch(error => {
             console.error('Error:', error);
+            const resultsDiv = document.getElementById("searchResults");
+            resultsDiv.innerHTML = "An error occurred while searching for books. Please try again later.";
         });
 }

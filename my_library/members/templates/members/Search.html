@@ -44,8 +44,8 @@
 
         <div class="search-input">
             <form method="GET" action="{% url 'search_books' %}">
-                <input type="text" id="searchInput" name="q" placeholder="Enter search term" value="{{ query }}">
-                <button type="submit">Search</button>
+                <input type="text" id="searchInput" name="q" placeholder="Enter search term" value="{{ query }}"  onclick="searchBooks()">
+                <button type="submit" >Search</button>
             </form>
         </div>
 

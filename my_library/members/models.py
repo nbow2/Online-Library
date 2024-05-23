@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 class UserType(models.Model):
     IsAdmin =  models.BooleanField(default=False)
@@ -22,8 +24,6 @@ class Profile(models.Model):
     def email(self):
         return self.userType.email
 
-
-
 class Book(models.Model):
     title = models.CharField(max_length=255)
     author = models.CharField(max_length=255)
@@ -36,7 +36,7 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
-
+    
 class Comment(models.Model):
     user = models.ForeignKey(UserType, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
@@ -72,8 +72,6 @@ class WaitingList(models.Model):
         return f"{self.user.username} is waiting for {self.book.title}"
 
 # Add signals to manage the waiting list when a book is returned
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 
 @receiver(post_save, sender=Booking)
 def handle_waiting_list(sender, instance, **kwargs):

@@ -54,23 +54,21 @@
     <div class="review-section">
         <h3>Reviews</h3>
         <form id="review-form">
+            {% csrf_token %}
             <textarea id="review-box" placeholder="Write your review here..." required></textarea>
             <button type="submit">Post Review</button>
         </form>
         <div id="reviews-container">
             <h4>Recent Reviews</h4>
-            <ul id="reviews-list"></ul>
+            <ul id="reviews-list">
+                {% for comment in comments %}
+                    <li>{{ comment.user.username }}: {{ comment.text_comment }}</li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
+    
 
-    <!--                 00000000000000000000000000                --
-    <img src="{{ book.image_url }}" alt="{{ book.title }}" class="book-cover">
-    <h1>{{ book.title }}</h1>
-    <p><strong>Author:</strong> {{ book.author }}</p>
-    <p><strong>Published:</strong> {{ book.year_of_publish }}</p>
-    <p><strong>Category:</strong> {{ book.category }}</p>
-    <p><strong>Description:</strong> {{ book.description }}</p>
-    <!--          00000000000000000000000000000000000            -->
-    <!-- Add more details as needed -->
+
 </body>
 </html>

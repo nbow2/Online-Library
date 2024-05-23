@@ -5,7 +5,6 @@ from .models import UserType, Profile, Book, Comment, Booking, WaitingList
 admin.site.register(Book)
 admin.site.register(UserType)
 admin.site.register(Profile)
-
 admin.site.register(Comment)
 admin.site.register(Booking)
 admin.site.register(WaitingList)

@@ -5,7 +5,7 @@
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render , redirect, get_object_or_404
-from .models import Book  , Profile , User , UserType 
+from .models import Book  , Profile , User , UserType, Comment
 #for the Q 
 from django.db.models import Q  # Import Q here
 from django.shortcuts import get_object_or_404
@@ -17,14 +17,32 @@ from django.contrib.auth import login, authenticate
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password # for hashing
-
-#this code should be in saprit file like Genrate_html_page.py
+from django.db.models.signals import post_save
 from django.template.loader import render_to_string
 from django.conf import settings
 import os
-from .models import Book
+
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def add_comment(request, book_id):
+    if request.method == 'POST':
+        user = request.user
+        book = get_object_or_404(Book, id=book_id)
+        text = request.POST.get('text_comment')
+
+        comment = Comment.objects.create(user=user, book=book, text_comment=text)
+        comment.save()
+
+        return JsonResponse({'success': True, 'username': user.username, 'comment': text})
+
+    return JsonResponse({'success': False}, status=400)
 
 
+def book_details(request, book_id):
+    book = get_object_or_404(Book, pk=book_id)
+    comments = Comment.objects.filter(book=book).order_by('-id')
+    return render(request, 'members/book_details.html', {'book': book, 'comments': comments})
 # To Shorthand the code
 # def render_template(request, template_name):
 #     template = loader.get_template(template_name)
@@ -51,9 +69,6 @@ def books_api(request):
   #  book = get_object_or_404(Book, pk=isbn)
    # return render(request, 'members/book_details.html', {'book': book})
 
-def book_details(request, book_id):
-    book = get_object_or_404(Book, pk=book_id)
-    return render(request, 'members/book_details.html', {'book': book})
 
 def generate_html_pages_for_books():
     books = Book.objects.all()
