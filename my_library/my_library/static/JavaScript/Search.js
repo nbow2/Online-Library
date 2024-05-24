@@ -51,3 +51,7 @@ function viewBookDetails(page) {
     // Redirect to book details page with bookId
     window.location.href = page;
 }
+
+
+
+

@@ -73,6 +73,8 @@ def books_api(request):
   #  book = get_object_or_404(Book, pk=isbn)
    # return render(request, 'members/book_details.html', {'book': book})
 
+def error_404(request):
+    return render(request , 'members/error.html')
 
 def generate_html_pages_for_books():
     books = Book.objects.all()

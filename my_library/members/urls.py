@@ -9,7 +9,7 @@ urlpatterns = [
     path('api/books/', views.books_api, name='books_api'),
     # this path is not handld yat 
 
-    path('404/', views.about, name='about'),
+    path('404/', views.error_404, name='404'),
     path('about/', views.about, name='about'),
     path('adminADD/', views.adminADD, name='adminADD'),
     path('booktime/<int:book_id>/', views.booktime, name='booktime'),

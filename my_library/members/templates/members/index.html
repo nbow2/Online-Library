@@ -58,5 +58,35 @@
     </div>
 
     <script src="{% static 'members/js/dynamicHome.js' %}"></script>
+
+
+     <!-- Footer -->
+     <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2024 Library of Egypt. All rights reserved.</p>
+            <p>Designed by Ahmed's colleagues.</p>
+            <p>This website was made by students in Cairo University. I wish you like the website.</p>
+            <ul class="footer-menu">
+                <li><a href="{% url 'Home' %}">Home</a></li>
+                <li><a href="{% url 'Search' %}">Search</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'list' %}">List</a></li>
+              
+            </ul>
+            <div class="social-icons">
+                <a href="https://www.facebook.com" target="_blank">
+                    <img src="{% static 'members/img/ff.png' %}" alt="Facebook" class="social-icon">
+                </a>
+                <a href="https://www.twitter.com" target="_blank">
+                    <img src="{% static 'members/img/xx.png' %}" alt="Twitter" class="social-icon">
+                </a>
+                <a href="https://www.instagram.com" target="_blank">
+                    <img src="{% static 'members/img/ii.png' %}" alt="Instagram" class="social-icon">
+                </a>
+            </div>
+        </div>
+    </footer>
+
+
 </body>
 </html>
