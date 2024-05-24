@@ -34,7 +34,7 @@
         </div>
     </nav>
     <div class="container">
-        <form action="{% url 'success_reserved' %}" method="POST" onsubmit="return validateAndRedirect()"> 
+        <form action="{% url 'success_reserved' book_id=reserved_book.id %}" method="POST" onsubmit="return validateAndRedirect()"> 
             {% csrf_token %}
             <div class="time">
                 <label for="startDate">Start Day</label>

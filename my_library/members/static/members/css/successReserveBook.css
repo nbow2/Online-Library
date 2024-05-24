@@ -11,3 +11,17 @@
     border-radius: 5px;
     margin-top: 10px;
 }
+.reservation-message ul {
+    list-style-type: none; 
+    padding: 0;
+    margin: 0;
+}
+.reservation-message li {
+    margin-bottom: 8px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 8px; 
+}
+.reservation-message li strong {
+    margin-right: 5px;
+    color: #007bff; 
+}

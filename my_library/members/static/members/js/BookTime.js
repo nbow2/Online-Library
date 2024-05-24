@@ -28,7 +28,5 @@ function validateAndRedirect() {
     // Store the reservation start and end dates in localStorage
     localStorage.setItem('reservationStartDate', StartDate);
     localStorage.setItem('reservationEndDate', EndDate);
-
-
     return true;
 }

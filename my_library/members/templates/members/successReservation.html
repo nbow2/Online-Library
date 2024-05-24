@@ -34,7 +34,19 @@
     </nav>
     <div class="container">
         <h1>Book Reserved Successfully</h1>
-        <p id="reservationMessage" class="reservation-message"></p>
+        <p id="reservationMessage" class="reservation-message">
+            {% if reserved_book %}
+                Book reserved successfully:
+                <ul>
+                    <li><strong>Title:</strong> {{ reserved_book.title }}</li>
+                    <li><strong>Author:</strong> {{ reserved_book.author }}</li>
+                    <li><strong>Published:</strong> {{ reserved_book.year_of_publish }}</li>
+                    <li><strong>Category:</strong> {{ reserved_book.category }}</li>
+                </ul>
+            {% else %}
+                No reservation details found.
+            {% endif %}
+        </p>
     </div>
 
     <script>
@@ -42,6 +54,10 @@
             var startDate = localStorage.getItem('reservationStartDate');
             var endDate = localStorage.getItem('reservationEndDate');
             if (startDate && endDate) {
+                // Extract date part only
+                startDate = startDate.split('T')[0]; // Split at 'T-> Time' to get the date part
+                endDate = endDate.split('T')[0];
+        
                 var message = 'Book reserved successfully from ' + startDate + ' to ' + endDate + '.';
                 document.getElementById('reservationMessage').textContent = message;
             }

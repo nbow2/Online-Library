@@ -46,7 +46,7 @@
                 <p><strong>Category:</strong> {{ book.category }}</p>
                 <p><strong>Description:</strong> {{ book.description }}</p>
                 <br>
-                <a href="{% url 'booktime' %}" class="borrow-button">Borrow Now</a>
+                <a href="{% url 'booktime' book_id=book.id %}" class="borrow-button">Borrow Now</a>
             </div>
         </div>
     </div>

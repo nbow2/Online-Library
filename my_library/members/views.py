@@ -5,7 +5,7 @@
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render , redirect, get_object_or_404
-from .models import Book  , Profile , User , UserType, Comment
+from .models import Book  , Profile , User , UserType, Comment , WaitingList ,handle_waiting_list
 #for the Q 
 from django.db.models import Q  # Import Q here
 from django.shortcuts import get_object_or_404
@@ -23,6 +23,7 @@ from django.conf import settings
 import os
 
 from django.contrib.auth.decorators import login_required
+
 
 @login_required
 def add_comment(request, book_id):
@@ -42,6 +43,7 @@ def add_comment(request, book_id):
 def book_details(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
     comments = Comment.objects.filter(book=book).order_by('-id')
+    selected_book_id = book_id
     return render(request, 'members/book_details.html', {'book': book, 'comments': comments})
 # To Shorthand the code
 # def render_template(request, template_name):
@@ -50,6 +52,8 @@ def book_details(request, book_id):
 
 def account(request):
     return render(request, 'members/account.html')
+
+
 
 # to show all the books from the database
 def home(request):
@@ -82,6 +86,7 @@ def generate_html_pages_for_books():
         with open(output_path, 'w', encoding='utf-8') as file:
             file.write(rendered_html)
 
+
 def about(request):
     return render(request, 'members/about.html')
 
@@ -95,15 +100,42 @@ def Mockingbird(request):
     return render(request, 'members/Book2.html')
 
 
-def SuccessReservatino(request):
+
+def wating_list(request , book_id):
     if request.user.is_authenticated:
-        return redirect('success_reserved')
-    return render(request , 'members/error.html')
+        book = get_object_or_404(Book, pk=book_id)
+        wating_list =  WaitingList()
+        wating_list.book = book
+        user = get_object_or_404(UserType, pk=book_id)
+        wating_list.user = user
+        handle_waiting_list(user , book)
+    else:
+        return render(request , 'members/error.html')
+
+
+    
+def success_reserved(request , book_id):
+    if request.user.is_authenticated:
+        book = get_object_or_404(Book, pk=book_id)
+        return render(request , 'members/successReservation.html' , {
+            'reserved_book' : book
+        })
+    else:
+        return render(request , 'members/error.html')
     
 
-def booktime(request):
+def booktime(request , book_id):
     if request.user.is_authenticated:
-        return render(request, 'members/booktime.html')
+        book = get_object_or_404(Book, pk=book_id)
+        if(book.available):
+            book.available = False
+            return render(request , 'members/watingList.html' , {
+                'reserved_book' : book,
+            } )
+        else:    
+            return render(request, 'members/booktime.html' , {
+                'reserved_book' : book,
+            })
     return render(request,'members/error.html')
 
 def list(request):
