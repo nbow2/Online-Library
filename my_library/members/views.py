@@ -1,12 +1,10 @@
 #from django.shortcuts import render
 
 # Create your views here.
-
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render , redirect, get_object_or_404
 from .models import Book  , Profile , User , UserType, Comment , WaitingList ,handle_waiting_list
-#for the Q 
 from django.db.models import Q  # Import Q here
 from django.shortcuts import get_object_or_404
 from .forms import BookForm 
@@ -21,10 +19,20 @@ from django.db.models.signals import post_save
 from django.template.loader import render_to_string
 from django.conf import settings
 import os
-
+import json
+from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 
+# To Shorthand the code
+# def render_template(request, template_name):
+#     template = loader.get_template(template_name)
+#     return HttpResponse(template.render(request=request))
 
+# to show all the books from the database
+def home(request):
+    books = Book.objects.all()
+    return render(request, 'members/index.html', {'books': books})
+#------------------------------- user interface or Roleplay------------------------------------
 @login_required
 def add_comment(request, book_id):
     if request.method == 'POST':
@@ -39,39 +47,35 @@ def add_comment(request, book_id):
 
     return JsonResponse({'success': False}, status=400)
 
-
 def book_details(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
     comments = Comment.objects.filter(book=book).order_by('-id')
     selected_book_id = book_id
     return render(request, 'members/book_details.html', {'book': book, 'comments': comments})
-# To Shorthand the code
-# def render_template(request, template_name):
-#     template = loader.get_template(template_name)
-#     return HttpResponse(template.render(request=request))
 
 def account(request):
-    return render(request, 'members/account.html')
+    if request.method == 'POST':
+        request.session.flush()  # Clear the session
+        messages.success(request, 'Successfully logged out')
+        return render(request ,'members/logIN.html')
+    else:
+        return render(request, 'members/account.html')
 
-
-
-# to show all the books from the database
-def home(request):
-    books = Book.objects.all()
-    return render(request, 'members/index.html', {'books': books})
-
-#this also not handed yat 
-# path('book/<int:id>/', views.book_detail, name='book_detail'),
-# def book_detail(request):
-   # return render(request ,'members/index.html' )
+def notify_user(book_title):
+    waiting_list_entries = WaitingList.objects.filter(book_title=book_title)
+    for entry in waiting_list_entries:
+        send_mail(
+            'Book Available',
+            f'Dear {entry.full_name},\n\nThe book "{book_title}" is now available. Please visit the library to borrow it.',
+            settings.EMAIL_HOST_USER,
+            [entry.email],
+            fail_silently=False,
+        )
+        entry.delete()  # Remove the entry after notification
 
 def books_api(request):
     books = Book.objects.all().values('title', 'image_url', 'id')
     return JsonResponse(list(books), safe=False)
-
-# def book_details(request, isbn):
-  #  book = get_object_or_404(Book, pk=isbn)
-   # return render(request, 'members/book_details.html', {'book': book})
 
 def error_404(request):
     return render(request , 'members/error.html')
@@ -88,20 +92,11 @@ def generate_html_pages_for_books():
         with open(output_path, 'w', encoding='utf-8') as file:
             file.write(rendered_html)
 
-
 def about(request):
     return render(request, 'members/about.html')
 
 def adminADD(request):
     return render(request, 'members/adminADD.html')
-
-def Great_Gatsby(request):
-    return render(request, 'members/book.html')
-  
-def Mockingbird(request):
-    return render(request, 'members/Book2.html')
-
-
 
 def wating_list(request , book_id):
     if request.user.is_authenticated:
@@ -114,8 +109,6 @@ def wating_list(request , book_id):
     else:
         return render(request , 'members/error.html')
 
-
-    
 def success_reserved(request , book_id):
     if request.user.is_authenticated:
         book = get_object_or_404(Book, pk=book_id)
@@ -125,7 +118,6 @@ def success_reserved(request , book_id):
     else:
         return render(request , 'members/error.html')
     
-
 def booktime(request , book_id):
     if request.user.is_authenticated:
         book = get_object_or_404(Book, pk=book_id)
@@ -144,32 +136,31 @@ def list(request):
     return render(request, 'members/list.html')
 
 @csrf_protect
-def Log_in(request):
+def log_in(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-       
         try:
-            users = UserType.objects.all()
-            
-            user = None
-            for i in users:
-                user = (i.username == username and i.password == password)
-            if(user is not None):
-                return redirect('Home')
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            return JsonResponse({'success': False, 'error': 'Invalid JSON'})
+
+        username = data.get('username')
+        password = data.get('password')
+
+        if not username or not password:
+            return JsonResponse({'success': False, 'error': 'Username and password are required'})
+
+        try:
+            user = UserType.objects.get(username=username, password=password)
+            if user:
+                request.session['username'] = user.username
+                request.session['is_admin'] = user.IsAdmin
+                return JsonResponse({'success': True})
             else:
-                messages.error(request, 'Invalid credentials')
-                return redirect(request, 'members/logIN.html')
-        except User.DoesNotExist:
-            messages.error(request, 'Invalid credentials')
-            return render(request, 'members/logIN.html')
+                return JsonResponse({'success': False, 'error': 'Invalid credentials'})
+        except UserType.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Invalid credentials'})
     else:
         return render(request, 'members/logIN.html')
-
-
-
-def Search(request):
-    return render(request, 'members/Search.html')
 
 #this the new function tosearch from database 
 def search_books(request):
@@ -228,34 +219,15 @@ def Sign_up(request):
 
     return render(request, 'members/signUP.html')
 
-def C_programming_book(request):
-    return render(request, 'members/C_progBook.html')
-  
-def clean_code_book(request):
-    return render(request, 'members/clean_codeBook.html')
+#-------------------------------------------------------------------------------------------
 
-def Enceladus_Book(request):
-    return render(request, 'members/EnceladusBook.html')
-
-def Kindness_is_my_PowerBook(request):
-    return render(request, 'members/Kindness_is_my_PowerBook.html')
-
-def The_Cat_in_the_hatBook(request):
-    return render(request, 'members/The_Cat_in_the_hatBook.html')  
-  
-
-
-# admin roleplay will use this methods
-
-
-
+# ------------------------admin roleplay will use this methods-----------------------
 def book_list(request):
     # Retrieve all books from the database
     books = Book.objects.all()
     print(books)
     # Render the adminADD.html template and pass the list of books to the template context
     return render(request, 'members/adminADD.html', {'books': books})
-
 
 def add_book(request):
     if request.method == 'POST':
@@ -286,6 +258,7 @@ def update_book(request, book_id):
     if request.method == 'POST':
         try:
             book = Book.objects.get(id=book_id)
+            
             book.title = request.POST.get('title')
             book.author = request.POST.get('author')
             book.year_of_publish = request.POST.get('year_of_publish')
@@ -293,11 +266,47 @@ def update_book(request, book_id):
             book.description = request.POST.get('description')
             book.isbn = request.POST.get('isbn')
             book.image_url = request.POST.get('image_url')
+            
             book.save()
             return JsonResponse({'success': True})
+        
         except Book.DoesNotExist:
-            return JsonResponse({'success': False})
-    return JsonResponse({'success': False})
+            return JsonResponse({'success': False, 'error': 'Book does not exist.'})
+        
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+
+    return JsonResponse({'success': False, 'error': 'Invalid request method.'})
+
+import logging
+# Set up logging
+logger = logging.getLogger(__name__)
+
+def update_book(request, book_id):
+    if request.method == 'POST':
+        try:
+            book = Book.objects.get(id=book_id)
+            
+            book.title = request.POST.get('title')
+            book.author = request.POST.get('author')
+            book.year_of_publish = request.POST.get('year_of_publish')
+            book.category = request.POST.get('category')
+            book.description = request.POST.get('description')
+            book.isbn = request.POST.get('isbn')
+            book.image_url = request.POST.get('image_url')
+            
+            book.save()
+            return JsonResponse({'success': True})
+        
+        except Book.DoesNotExist:
+            logger.error(f"Book with id {book_id} does not exist.")
+            return JsonResponse({'success': False, 'error': 'Book does not exist.'})
+        
+        except Exception as e:
+            logger.error(f"Error updating book with id {book_id}: {e}")
+            return JsonResponse({'success': False, 'error': str(e)})
+
+    return JsonResponse({'success': False, 'error': 'Invalid request method.'})
 
 def book_management(request):
     if request.method == 'POST':
@@ -315,3 +324,30 @@ def book_management(request):
 
     # Render the template with the form and book data
     return render(request, 'members/book_management.html', {'form': form, 'books': books})
+#------------------------------------------------------------------
+
+
+#------------------------- this should by delete it ---------------------------------
+def Search(request):
+    return render(request, 'members/Search.html')
+
+def Great_Gatsby(request):
+    return render(request, 'members/book.html')
+  
+def Mockingbird(request):
+    return render(request, 'members/Book2.html')
+def C_programming_book(request):
+    return render(request, 'members/C_progBook.html')
+  
+def clean_code_book(request):
+    return render(request, 'members/clean_codeBook.html')
+
+def Enceladus_Book(request):
+    return render(request, 'members/EnceladusBook.html')
+
+def Kindness_is_my_PowerBook(request):
+    return render(request, 'members/Kindness_is_my_PowerBook.html')
+
+def The_Cat_in_the_hatBook(request):
+    return render(request, 'members/The_Cat_in_the_hatBook.html')  
+#-----------------------------------------------------------------------

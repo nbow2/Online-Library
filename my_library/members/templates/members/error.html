@@ -9,6 +9,31 @@
     <title>404 Not Found</title>
 </head>
 <body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="{% url 'Home' %}">Library of Egypt</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="{% url 'Home' %}">Home</a></li>
+                <li><a href="{% url 'Search' %}">Search</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'list' %}">List</a></li>
+                {% if request.session.username %}
+                    <li>Welcome, {{ request.session.username }}</li>
+                    {% if request.session.is_admin %}
+                        <li><a href="{% url 'book_list' %}">Admin Menu</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'account' %}">Account</a></li>
+                {% else %}
+                    <li><a href="{% url 'Log_in' %}">Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    
+
     <div class="container">
         <h1>Login Required</h1>
         <p>You need to log in to access this page.</p>

@@ -27,6 +27,7 @@ function signUp() {
     }
 
     if (password !== rePassword) {
+        showError(password, 'Passwords do not match.');
         alert("Passwords do not match.");
         return;
     }
@@ -39,10 +40,10 @@ function signUp() {
     // If all validation passed
     // AJAX request to send the form data to the server
     //    Example
-    // var formData = { name: name, username: username, email: email, password: password, userType: userType };
-    // var jsonFormData = JSON.stringify(formData);
-    // var xhr = new XMLHttpRequest();
-    // xhr.open("POST", "http://127.0.0.1:8000/", true);
-    // xhr.setRequestHeader("Content-Type", "application/json");
-    // xhr.send(jsonFormData);
+    var formData = { name: name, username: username, email: email, password: password, userType: userType };
+    var jsonFormData = JSON.stringify(formData);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://127.0.0.1:8000/", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(jsonFormData);
 }

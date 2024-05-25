@@ -10,24 +10,33 @@
     <link rel="stylesheet" href="{% static 'members/css/sign.css' %}">
     <link rel="icon" href="{% static 'members/img/Library_of_Egypt.jpg' %}">
 </head>
-<nav class="navbar">
-    <div class="nav-container">
-        <div class="logo">
-            <a href="{% url 'Home' %}">Library of Egypt</a>
-        </div>
-        <ul class="nav-menu">
-            <li><a href="{% url 'Home' %}">Home</a></li>
-            <li><a href="{% url 'Search' %}">Search</a></li>
-            <li><a href="{% url 'about' %}">About</a></li>
-            {% comment %} <li><a href="{% url 'account' %}">Account</a></li> {% endcomment %}
-            <li><a href="{% url 'list' %}">List</a></li>
-        </ul>
-        <div class="login-button">
-            <a href="{% url 'Log_in' %}">Login</a>
-        </div>
-    </div>
-</nav>
+
 <body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="{% url 'Home' %}">Library of Egypt</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="{% url 'Home' %}">Home</a></li>
+                <li><a href="{% url 'Search' %}">Search</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'list' %}">List</a></li>
+                {% if request.session.username %}
+                    <li>Welcome, {{ request.session.username }}</li>
+                    {% if request.session.is_admin %}
+                        <li><a href="{% url 'book_list' %}">Admin Menu</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'account' %}">Account</a></li>
+                {% else %}
+                    <li><a href="{% url 'Log_in' %}">Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    
+
     <div class="center">
         <h1>Sign Up</h1>
         <form id="signup-form" method="POST">
