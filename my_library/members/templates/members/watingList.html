@@ -17,11 +17,11 @@
         <form id="waitingListForm" method="{% url 'Log_in' %}">
             <div class="form-group">
                 <label for="fullName">Full Name:</label>
-                <input type="text" id="fullName" name="fullName" required>
+                <input type="text" id="fullName" name="fullName" value="{{ username }}" readonly>
             </div>
             <div class="form-group">
                 <label for="email">Email Address:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" value="{{ username.email }}" readonly>
             </div>
             <div class="form-group">
                 <button type="submit">Join</button>
@@ -32,22 +32,27 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const fullNameInput = document.getElementById('fullName');
+            const emailInput = document.getElementById('email');
             const form = document.getElementById('waitingListForm');
             const messageDiv = document.getElementById('message');
-
+            const joinButton = document.getElementById('joinButton');
+    
+            // Set the input fields as read-only
+            fullNameInput.setAttribute('readonly', true);
+            emailInput.setAttribute('readonly', true);
+    
             form.addEventListener('submit', (event) => {
-                event.preventDefault();
-                const fullName = form.elements.fullName.value.trim();
-                const email = form.elements.email.value.trim();
-
-                if (fullName && email) {
-                    // Here, you can send the form data to a server using fetch or XMLHttpRequest
-                    // For demonstration purposes, we'll just display a message
-                    messageDiv.textContent = `Thank you, ${fullName}! You've been added to the waiting list.`;
-                    form.reset(); // Reset the form after submission
-                } else {
-                    messageDiv.textContent = 'Please enter your full name and email address.';
-                }
+                event.preventDefault(); // Prevent form submission
+    
+                // Display the "Thank you" message
+                messageDiv.textContent = `Thank you, You've been added to the waiting list.`;
+                form.reset(); // Reset the form after submission
+    
+                // Redirect to the home page after 4 seconds
+                setTimeout(() => {
+                    window.location.href = "{% url 'Home' %}";
+                }, 4000);
             });
         });
     </script>

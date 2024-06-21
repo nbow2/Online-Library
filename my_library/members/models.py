@@ -67,7 +67,7 @@ class WaitingList(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
-    email = models.EmailField()
+    email = models.EmailField(default='example@example.com')
 
     def __str__(self):
         return f"{self.user.username} is waiting for {self.book.title}"

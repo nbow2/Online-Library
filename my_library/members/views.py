@@ -98,16 +98,20 @@ def about(request):
 def adminADD(request):
     return render(request, 'members/adminADD.html')
 
-def wating_list(request , book_id):
+def handle_waiting_list(user, book):
+    WaitingList.objects.filter(user=user, book=book).update(status='waiting')
+    
+def waiting_list(request, book_id):
     if request.user.is_authenticated:
         book = get_object_or_404(Book, pk=book_id)
-        wating_list =  WaitingList()
-        wating_list.book = book
-        user = get_object_or_404(UserType, pk=book_id)
-        wating_list.user = user
-        handle_waiting_list(user , book)
+        user = request.user
+        waiting_list = WaitingList(book=book, user=user)
+        waiting_list.save()
+        handle_waiting_list(user, book)
+        messages.success("Waiting Success")
+        return HttpResponse('Added to waiting list')  # Or render a success page
     else:
-        return render(request , 'members/error.html')
+        return render(request, 'members/error.html')
 
 def success_reserved(request , book_id):
     if request.user.is_authenticated:
@@ -121,12 +125,15 @@ def success_reserved(request , book_id):
 def booktime(request , book_id):
     if request.user.is_authenticated:
         book = get_object_or_404(Book, pk=book_id)
-        if(book.available):
-            book.available = False
+        user = get_object_or_404(User, pk=request.user.id)
+        if(book.available == False):
             return render(request , 'members/watingList.html' , {
                 'reserved_book' : book,
+                'username' : user,
             } )
         else:    
+            book.available = False
+            book.save()
             return render(request, 'members/booktime.html' , {
                 'reserved_book' : book,
             })
