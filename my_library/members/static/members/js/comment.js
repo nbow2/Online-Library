@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (reviewText.trim() !== "") { // Checks if text isn't just empty or spaces
             var xhr = new XMLHttpRequest();
-            var url = `/add_comment/{{ book.id }}/`; // The URL for your add_comment view
+            var url = `/book/{{ book.id }}/`; // The URL for your add_comment view
 
             xhr.open("POST", url, true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");

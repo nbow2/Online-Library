@@ -26,6 +26,7 @@
             </ul>
             <div class="login-button">
                 {% if user.is_authenticated %}
+                <li><a href="{% url 'book_list' %}">Admin Menu</a></li>
                 <a href="{% url 'account' %}">{{ user.username }}</a>
             {% else %}
                 <a href="{% url 'Log_in' %}">Login</a>
@@ -53,9 +54,9 @@
 
     <div class="review-section">
         <h3>Reviews</h3>
-        <form id="review-form">
+        <form id="review-form" method="POST" action="{% url 'book_details' book_id=book.id %}">
             {% csrf_token %}
-            <textarea id="review-box" placeholder="Write your review here..." required></textarea>
+            <textarea id="review-box" name="text_comment" placeholder="Write your review here..." required></textarea>
             <button type="submit">Post Review</button>
         </form>
         <div id="reviews-container">

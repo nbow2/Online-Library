@@ -262,7 +262,7 @@ def delete_book(request, book_id):
     return JsonResponse({'success': False})
 
 def update_book(request, book_id):
-    if request.method == 'POST':
+    if request.method == 'GET':
         try:
             book = Book.objects.get(id=book_id)
             

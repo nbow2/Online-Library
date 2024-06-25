@@ -50,7 +50,7 @@ function editRow(button, bookId) {
 }
 
 function saveRow(button, bookId) {
-    var row = button.closest('tr');
+    var row = button.closest('td');
     var inputs = row.querySelectorAll('input');
     var formData = new FormData();
 

@@ -28,9 +28,15 @@ function signUp() {
 
     if (password !== rePassword) {
         showError(password, 'Passwords do not match.');
+        showError(rePassword, 'Passwords do not match.');
         alert("Passwords do not match.");
         return;
     }
+    if (password !== rePassword) {
+        alert('Passwords do not match!');
+        return;
+      }
+  
     localStorage.setItem('username' , username);
     localStorage.setItem('name' , name);
     localStorage.setItem('password' , password);
